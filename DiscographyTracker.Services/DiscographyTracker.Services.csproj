@@ -54,11 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumService.cs" />
+    <Compile Include="ArtistService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SongService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DiscographyTracker.Data\DiscographyTracker.Data.csproj">
+      <Project>{c06b8161-eafb-460e-82cd-9828ac4b26c1}</Project>
+      <Name>DiscographyTracker.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscographyTracker.Models\DiscographyTracker.Models.csproj">
+      <Project>{9bb7346e-8083-4430-8736-dc5816e3d05c}</Project>
+      <Name>DiscographyTracker.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
