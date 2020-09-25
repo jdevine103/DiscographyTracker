@@ -28,7 +28,7 @@ namespace DiscographyTracker.Services
             using (var db = new ApplicationDbContext())
             {
                 db.Artists.Add(entity);
-                return db.SaveChanges() ==1;
+                return db.SaveChanges() == 1;
             }
         }
         public IEnumerable<ArtistListItem> GetArtists()
@@ -46,6 +46,36 @@ namespace DiscographyTracker.Services
                             ArtistName = e.ArtistName
                         });
                 return query.ToArray();
+            }
+        }
+        public ArtistDetail GetArtistById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Artists
+                        .Single(e => e.ArtistID == id);
+                return
+                    new ArtistDetail
+                    {
+                        ArtistID = entity.ArtistID,
+                        ArtistName = entity.ArtistName
+                    };
+            }
+        }
+        public bool UpdateArtist(ArtistEdit model)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var entity =
+                    db
+                        .Artists
+                        .Single(e => e.ArtistID == model.ArtistID);
+
+                entity.ArtistName = model.ArtistName;
+
+                return db.SaveChanges() == 1;
             }
         }
     }

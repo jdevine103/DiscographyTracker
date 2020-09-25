@@ -7,7 +7,8 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Artist", "Create", null, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Create New Artist and add Albums", "Create", null, new { @class = "btn btn-primary btn-large" })
 </p>
 <table class="table">
     <tr>
@@ -29,9 +30,9 @@
             @Html.DisplayFor(modelItem => item.ArtistName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ArtistID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ArtistID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ArtistID })
         </td>
     </tr>
 }

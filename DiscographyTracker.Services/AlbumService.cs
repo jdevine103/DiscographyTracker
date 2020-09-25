@@ -31,5 +31,57 @@ namespace DiscographyTracker.Services
                 return db.SaveChanges() == 1;
             }
         }
+        public IEnumerable<AlbumListItem> GetAlbums()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var query =
+                    db.Albums
+                    .Where(e => e.ArtistID > 0) //probably not proper
+                    .Select(
+                        e =>
+                        new AlbumListItem
+                        {
+                            AlbumID = e.AlbumID,
+                            ArtistID = e.ArtistID,
+                            AlbumTitle = e.AlbumTitle,
+                            ReleaseDate = e.ReleaseDate
+                        });
+                return query.ToArray();
+            }
+        }
+        public AlbumDetail GetAlbumById(int id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var entity =
+                    db
+                        .Albums
+                        .Single(e => e.AlbumID == id);
+                return
+                    new AlbumDetail
+                    {
+                        ArtistID = entity.ArtistID,
+                        AlbumTitle = entity.AlbumTitle,
+                        ReleaseDate = entity.ReleaseDate
+                    };
+            }
+        }
+        public bool UpdateAlbum(AlbumEdit model)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var entity =
+                    db
+                        .Albums
+                        .Single(e => e.AlbumID == model.AlbumID);
+
+                entity.ArtistID = model.ArtistID;
+                entity.AlbumTitle = model.AlbumTitle;
+                entity.ReleaseDate = model.ReleaseDate;
+
+                return db.SaveChanges() == 1;
+            }
+        }
     }
 }

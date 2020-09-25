@@ -31,5 +31,59 @@ namespace DiscographyTracker.Services
                 return db.SaveChanges() == 1;
             }
         }
+        public IEnumerable<SongListItem> GetSongs()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var query =
+                    db.Songs
+                    .Where(e => e.SongID > 0) //probably not proper
+                    .Select(
+                        e =>
+                        new SongListItem
+                        {
+                            SongID = e.SongID,
+                            AlbumID = e.AlbumID,
+                            SongName = e.SongName,
+                            HaveListened = e.HaveListened
+                        });
+                return query.ToArray();
+            }
+        }
+        public SongDetail GetSongById(int id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var entity =
+                    db
+                        .Songs
+                        .Single(e => e.SongID == id);
+                return
+                    new SongDetail
+                    {
+                        SongID = entity.SongID,
+                        AlbumID = entity.AlbumID,
+                        SongName = entity.SongName,
+                        HaveListened = entity.HaveListened
+                    };
+            }
+        }
+        public bool UpdateSong(SongEdit model)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var entity =
+                    db
+                        .Songs
+                        .Single(e => e.SongID == model.SongID);
+
+                entity.SongID = model.SongID;
+                entity.AlbumID = model.AlbumID;
+                entity.SongName = model.SongName;
+                entity.HaveListened = model.HaveListened;
+
+                return db.SaveChanges() == 1;
+            }
+        }
     }
 }

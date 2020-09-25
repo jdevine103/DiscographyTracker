@@ -26,4 +26,26 @@ namespace DiscographyTracker.Models
         [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
     }
+    public class AlbumEdit
+    {
+        public int AlbumID { get; set; }
+        public int ArtistID { get; set; }
+        [Required]
+        [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
+        [Display(Name = "Album Title")]
+        public string AlbumTitle { get; set; }
+        [Display(Name = "Release Date")]
+        public DateTime ReleaseDate { get; set; }
+    }
+    public class AlbumDetail
+    {
+        public int AlbumID { get; set; }
+        public int ArtistID { get; set; }
+        [Required]
+        [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
+        [Display(Name = "Album Title")]
+        public string AlbumTitle { get; set; }
+        [Display(Name = "Release Date")]
+        public DateTime ReleaseDate { get; set; }
+    }
 }

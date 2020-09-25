@@ -20,4 +20,22 @@ namespace DiscographyTracker.Models
         [Display(Name = "Artist Name")]
         public string ArtistName { get; set; }
     }
+    public class ArtistEdit
+    {
+        [Required]
+        public int ArtistID { get; set; }
+        [Required]
+        [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
+        [Display(Name = "Artist Name")]
+        public string ArtistName { get; set; }
+    }
+    public class ArtistDetail
+    {
+        [Required]
+        public int ArtistID { get; set; }
+        [Required]
+        [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
+        [Display(Name = "Artist Name")]
+        public string ArtistName { get; set; }
+    }
 }
