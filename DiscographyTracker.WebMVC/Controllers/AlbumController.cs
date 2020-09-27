@@ -1,4 +1,5 @@
-﻿using DiscographyTracker.Models;
+﻿using DiscographyTracker.Data;
+using DiscographyTracker.Models;
 using DiscographyTracker.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -11,6 +12,8 @@ namespace DiscographyTracker.WebMVC.Controllers
 {
     public class AlbumController : Controller
     {
+        private ApplicationDbContext _db = new ApplicationDbContext();
+
         // GET: Album
         public ActionResult Index()
         {
@@ -24,8 +27,11 @@ namespace DiscographyTracker.WebMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
+                //ViewBag
+                ViewBag.Artists = new SelectList(_db.Artists.ToList(), "ArtistID", "ArtistName");
                 return View(model);
             }
+            
 
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new AlbumService(userId);
@@ -36,6 +42,8 @@ namespace DiscographyTracker.WebMVC.Controllers
         }
         public ActionResult Edit(int id)
         {
+            //ViewBag
+            ViewBag.Artists = new SelectList(_db.Artists.ToList(), "ArtistID", "ArtistName");
             var service = CreateAlbumService();
             var detail = service.GetAlbumById(id);
             var model =
@@ -52,10 +60,17 @@ namespace DiscographyTracker.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, AlbumEdit model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                //ViewBag
+                ViewBag.Artists = new SelectList(_db.Artists.ToList(), "ArtistID", "ArtistName");
+                return View(model);
+            }
 
             if (model.AlbumID != id)
             {
+                //ViewBag
+                ViewBag.Artists = new SelectList(_db.Artists.ToList(), "ArtistID", "ArtistName");
                 ModelState.AddModelError("", "Id Mismatch");
                 return View(model);
             }

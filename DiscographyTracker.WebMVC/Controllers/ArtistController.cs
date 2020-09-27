@@ -1,4 +1,5 @@
-﻿using DiscographyTracker.Models;
+﻿using DiscographyTracker.Data;
+using DiscographyTracker.Models;
 using DiscographyTracker.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -31,6 +32,22 @@ namespace DiscographyTracker.WebMVC.Controllers
             var service = new ArtistService(userId);
 
             service.CreateArtist(model);
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult CreateWithAlbum(ArtistAlbumCreate model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ArtistService(userId);
+            var albumService = new AlbumService(userId);
+
+            Artist newArtist = service.CreateArtist(model.ToArtistCreate(model));
+            albumService.CreateAlbum(model.ToAlbumCreate(model, newArtist.ArtistID));
 
             return RedirectToAction("Index");
         }

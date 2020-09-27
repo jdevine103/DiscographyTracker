@@ -17,7 +17,7 @@ namespace DiscographyTracker.Services
             _userId = userId;
         }
 
-        public bool CreateArtist(ArtistCreate model)
+        public Artist CreateArtist(ArtistCreate model)
         {
             var entity =
                 new Artist()
@@ -28,7 +28,12 @@ namespace DiscographyTracker.Services
             using (var db = new ApplicationDbContext())
             {
                 db.Artists.Add(entity);
-                return db.SaveChanges() == 1;
+                if (db.SaveChanges() == 1)
+                {
+                    return entity;
+                }
+                else
+                    return null; 
             }
         }
         public IEnumerable<ArtistListItem> GetArtists()

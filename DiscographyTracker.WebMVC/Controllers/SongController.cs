@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DiscographyTracker.Data;
 
 namespace DiscographyTracker.WebMVC.Controllers
 {
     public class SongController : Controller
     {
+        private ApplicationDbContext _db = new ApplicationDbContext();
+
         // GET: Song
         public ActionResult Index()
         {
@@ -25,6 +28,8 @@ namespace DiscographyTracker.WebMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
+                //ViewBag
+                ViewBag.Albums = new SelectList(_db.Albums.ToList(), "AlbumID", "AlbumTitle");
                 return View(model);
             }
 
@@ -37,6 +42,8 @@ namespace DiscographyTracker.WebMVC.Controllers
         }
         public ActionResult Edit(int id)
         {
+            //ViewBag
+            ViewBag.Albums = new SelectList(_db.Albums.ToList(), "AlbumID", "AlbumTitle");
             var service = CreateSongService();
             var detail = service.GetSongById(id);
             var model =

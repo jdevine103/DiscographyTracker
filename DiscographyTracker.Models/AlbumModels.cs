@@ -14,7 +14,7 @@ namespace DiscographyTracker.Models
         [Display(Name = "Album Title")]
         public string AlbumTitle { get; set; }
         [Display(Name = "Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        public DateTimeOffset ReleaseDate { get; set; }
     }
     public class AlbumCreate
     {
@@ -24,7 +24,9 @@ namespace DiscographyTracker.Models
         [Display(Name = "Album Title")]
         public string AlbumTitle { get; set; }
         [Display(Name = "Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:2020-01-01}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset ReleaseDate { get; set; }
     }
     public class AlbumEdit
     {
@@ -35,7 +37,9 @@ namespace DiscographyTracker.Models
         [Display(Name = "Album Title")]
         public string AlbumTitle { get; set; }
         [Display(Name = "Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset ReleaseDate { get; set; }
     }
     public class AlbumDetail
     {
@@ -46,6 +50,6 @@ namespace DiscographyTracker.Models
         [Display(Name = "Album Title")]
         public string AlbumTitle { get; set; }
         [Display(Name = "Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        public DateTimeOffset ReleaseDate { get; set; }
     }
 }
