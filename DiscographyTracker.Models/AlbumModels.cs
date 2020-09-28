@@ -51,5 +51,6 @@ namespace DiscographyTracker.Models
         public string AlbumTitle { get; set; }
         [Display(Name = "Release Date")]
         public DateTimeOffset ReleaseDate { get; set; }
+        public IEnumerable<SongDetail> Songs { get; set; }
     }
 }

@@ -37,5 +37,6 @@ namespace DiscographyTracker.Models
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Artist Name")]
         public string ArtistName { get; set; }
+        public IEnumerable<AlbumDetail> Albums { get; set; }
     }
 }

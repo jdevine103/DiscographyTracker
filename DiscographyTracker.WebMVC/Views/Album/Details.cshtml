@@ -42,9 +42,20 @@
             @Html.DisplayFor(model => model.ReleaseDate)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Songs)
+        </dt>
+
+        @foreach (var song in Model.Songs)
+        {
+            <dd>
+                @Html.DisplayFor(modelItem => song.SongName)
+            </dd>
+        }
     </dl>
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID}) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
