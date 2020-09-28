@@ -85,5 +85,19 @@ namespace DiscographyTracker.Services
                 return db.SaveChanges() == 1;
             }
         }
+        public bool DeleteSong(int songID)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Songs
+                        .Single(e => e.SongID == songID);
+
+                ctx.Songs.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

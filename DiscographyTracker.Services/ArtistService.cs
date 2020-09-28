@@ -16,7 +16,6 @@ namespace DiscographyTracker.Services
         {
             _userId = userId;
         }
-
         public Artist CreateArtist(ArtistCreate model)
         {
             var entity =
@@ -81,6 +80,20 @@ namespace DiscographyTracker.Services
                 entity.ArtistName = model.ArtistName;
 
                 return db.SaveChanges() == 1;
+            }
+        }
+        public bool DeleteArtist(int artistID)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Artists
+                        .Single(e => e.ArtistID == artistID);
+
+                ctx.Artists.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }

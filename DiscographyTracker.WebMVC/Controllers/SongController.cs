@@ -40,6 +40,13 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult Details(int id)
+        {
+            var svc = CreateSongService();
+            var model = svc.GetSongById(id);
+
+            return View(model);
+        }
         public ActionResult Edit(int id)
         {
             //ViewBag
@@ -78,6 +85,27 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             ModelState.AddModelError("", $" {model.SongName} could not be updated.");
             return View(model);
+        }
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var svc = CreateSongService();
+            var model = svc.GetSongById(id);
+
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var svc = CreateSongService();
+
+            svc.DeleteSong(id);
+
+            TempData["SaveResult"] = "The song was deleted";
+
+            return RedirectToAction("Index");
         }
         private SongService CreateSongService()
         {

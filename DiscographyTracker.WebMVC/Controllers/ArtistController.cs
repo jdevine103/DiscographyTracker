@@ -35,6 +35,13 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult Details(int id)
+        {
+            var svc = CreateArtistService();
+            var model = svc.GetArtistById(id);
+
+            return View(model);
+        }
         public ActionResult CreateWithAlbum(ArtistAlbumCreate model)
         {
             if (!ModelState.IsValid)
@@ -85,6 +92,27 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             ModelState.AddModelError("", $" {model.ArtistName} could not be updated.");
             return View(model);
+        }
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var svc = CreateArtistService();
+            var model = svc.GetArtistById(id);
+
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var svc = CreateArtistService();
+
+            svc.DeleteArtist(id);
+
+            TempData["SaveResult"] = "The artist was deleted";
+
+            return RedirectToAction("Index");
         }
         private ArtistService CreateArtistService()
         {
