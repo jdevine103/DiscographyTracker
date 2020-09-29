@@ -61,6 +61,7 @@ namespace DiscographyTracker.Services
                 return
                     new AlbumDetail
                     {
+                        AlbumID = id,
                         ArtistID = entity.ArtistID,
                         AlbumTitle = entity.AlbumTitle,
                         ReleaseDate = entity.ReleaseDate,

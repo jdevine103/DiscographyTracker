@@ -50,7 +50,7 @@ namespace DiscographyTracker.WebMVC.Controllers
         public ActionResult Edit(int id)
         {
             //ViewBag
-            ViewBag.Albums = new SelectList(_db.Albums.ToList(), "AlbumID", "AlbumTitle");
+            ViewBag.Albums = new SelectList(_db.Albums.ToList(), "AlbumID", "AlbumID");
             var service = CreateSongService();
             var detail = service.GetSongById(id);
             var model =

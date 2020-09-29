@@ -33,9 +33,10 @@
         @foreach (var album in Model.Albums)
         {
             <dd>
-                @Html.DisplayFor(modelItem => album.AlbumTitle)
+                @Html.ActionLink($"{album.AlbumTitle}", "Details", "Album", new { id = album.AlbumID }.ToString())
+                @Html.RouteLink($"{album.AlbumTitle}", new { Action = $"Album/Details/" } )
             </dd>
-        }
+           }
 
     </dl>
 </div>

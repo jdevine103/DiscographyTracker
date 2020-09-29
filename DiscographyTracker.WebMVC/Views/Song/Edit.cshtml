@@ -19,9 +19,9 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.AlbumID, "Album Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.AlbumID, "Album ID", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("ArtistID", (IEnumerable<SelectListItem>)ViewBag.Albums, htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("AlbumID", (IEnumerable<SelectListItem>)ViewBag.Albums, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.AlbumID, "", new { @class = "text-danger" })
         </div>
     </div>
