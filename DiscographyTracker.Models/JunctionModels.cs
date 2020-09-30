@@ -18,6 +18,8 @@ namespace DiscographyTracker.Models
         [Display(Name = "Album Title")]
         public string AlbumTitle { get; set; }
         [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:2020-01-01}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }
 
         public ArtistCreate ToArtistCreate(ArtistAlbumCreate model)

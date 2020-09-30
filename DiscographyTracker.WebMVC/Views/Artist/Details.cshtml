@@ -33,8 +33,7 @@
         @foreach (var album in Model.Albums)
         {
             <dd>
-                @Html.ActionLink($"{album.AlbumTitle}", "Details", "Album", new { id = album.AlbumID }.ToString())
-                @Html.RouteLink($"{album.AlbumTitle}", new { Action = $"Album/Details/" } )
+                @Html.ActionLink($"{album.AlbumTitle}", "Details", "Album", new { id = album.AlbumID }, null)
             </dd>
            }
 

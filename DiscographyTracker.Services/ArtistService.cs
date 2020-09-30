@@ -67,8 +67,10 @@ namespace DiscographyTracker.Services
                         ArtistName = entity.ArtistName,
                         Albums = entity.Albums.Select(e => new AlbumDetail
                         {
-                            AlbumTitle = e.AlbumTitle
-                        })
+                            AlbumID = e.AlbumID,
+                            AlbumTitle = e.AlbumTitle,
+                            ReleaseDate = e.ReleaseDate
+                        }).ToArray()
                     };
             }
         }

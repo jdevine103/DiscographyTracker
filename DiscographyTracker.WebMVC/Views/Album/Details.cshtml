@@ -48,9 +48,9 @@
 
         @foreach (var song in Model.Songs)
         {
-            <dd>
-                @Html.DisplayFor(modelItem => song.SongName)
-            </dd>
+    <dd>
+        @Html.ActionLink($"{song.SongName}", "Details", "Song", new { id = song.SongID }, null)
+    </dd>
         }
     </dl>
 
