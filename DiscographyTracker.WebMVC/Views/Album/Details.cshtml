@@ -1,0 +1,53 @@
+﻿@model DiscographyTracker.Models.AlbumDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AlbumDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtistName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AlbumTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlbumTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Songs)
+        </dt>
+
+        @foreach (var song in Model.Songs)
+        {
+             <dd>
+             @Html.ActionLink($"{song.SongName}", "Details", "Song", new { id = song.SongID }, null)
+            </dd>
+        }
+    </dl>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
