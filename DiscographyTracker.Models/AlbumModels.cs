@@ -45,6 +45,8 @@ namespace DiscographyTracker.Models
     {
         public int AlbumID { get; set; }
         public int ArtistID { get; set; }
+        [Display(Name = "Artist Name")]
+        public string ArtistName { get; set; }
         [Required]
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Album Title")]

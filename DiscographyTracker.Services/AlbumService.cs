@@ -63,6 +63,7 @@ namespace DiscographyTracker.Services
                     {
                         AlbumID = id,
                         ArtistID = entity.ArtistID,
+                        ArtistName = entity.Artist.ArtistName,
                         AlbumTitle = entity.AlbumTitle,
                         ReleaseDate = entity.ReleaseDate,
                         Songs = entity.Songs.Select(e =>  new SongDetail

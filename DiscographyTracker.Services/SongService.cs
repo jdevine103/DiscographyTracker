@@ -61,7 +61,9 @@ namespace DiscographyTracker.Services
                 return
                     new SongDetail
                     {
+                        ArtistName = entity.Album.Artist.ArtistName,
                         SongID = entity.SongID,
+                        AlbumTitle = entity.Album.AlbumTitle,
                         AlbumID = entity.AlbumID,
                         SongName = entity.SongName,
                         HaveListened = entity.HaveListened

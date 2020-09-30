@@ -11,19 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AlbumID)
+            @Html.DisplayNameFor(model => model.ArtistName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AlbumID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtistID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ArtistID)
+            @Html.DisplayFor(model => model.ArtistName)
         </dd>
 
         <dt>
@@ -48,9 +40,9 @@
 
         @foreach (var song in Model.Songs)
         {
-    <dd>
-        @Html.ActionLink($"{song.SongName}", "Details", "Song", new { id = song.SongID }, null)
-    </dd>
+             <dd>
+             @Html.ActionLink($"{song.SongName}", "Details", "Song", new { id = song.SongID }, null)
+            </dd>
         }
     </dl>
 
