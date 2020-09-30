@@ -59,6 +59,8 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Song.cs" />
+    <Compile Include="UserArtist.cs" />
+    <Compile Include="UserCrate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

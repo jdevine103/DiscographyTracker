@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
@@ -11,6 +12,10 @@ namespace DiscographyTracker.Data
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public virtual List<UserArtist> UserArtists { get; set; }
+
+        //public virtual List<UserAlbum> UserAlbums { get; set; }      
+        //public virtual List<UserSongs> UserSongs { get; set; }   
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -34,6 +39,7 @@ namespace DiscographyTracker.Data
         public DbSet<Artist> Artists { get; set; } 
         public DbSet<Album> Albums { get; set; } 
         public DbSet<Song> Songs { get; set; }
+        public DbSet<UserArtist> UserArtists { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

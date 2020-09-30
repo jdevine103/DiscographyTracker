@@ -38,5 +38,37 @@ namespace DiscographyTracker.Models
         [Display(Name = "Artist Name")]
         public string ArtistName { get; set; }
         public IEnumerable<AlbumDetail> Albums { get; set; }
+        public UserArtistCreate ToUserArtistCreate()
+        {
+            var userArtistCreate = new UserArtistCreate();
+            userArtistCreate.ArtistID = ArtistID;
+            return userArtistCreate;
+        }
     }
+    public class UserArtistListItem
+    {
+        public string UserID { get; set; }
+        public int UserArtistID { get; set; }
+        public int ArtistID { get; set; }
+    }
+    public class UserArtistCreate
+    {
+        public string UserID { get; set; }
+        public int UserArtistID { get; set; }
+        [Required]
+        public int ArtistID { get; set; }
+    }
+    public class UserArtistEdit
+    {
+        public string UserID { get; set; }
+        public int UserArtistID { get; set; }
+        public int ArtistID { get; set; }
+    }
+    public class UserArtistDetail
+    {
+        public string UserID { get; set; }
+        public int UserArtistID { get; set; }
+        public int ArtistID { get; set; }
+    }
+
 }

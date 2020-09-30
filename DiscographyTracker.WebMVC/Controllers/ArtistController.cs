@@ -35,6 +35,24 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult AddToCrate(int id)
+        {
+            var svc = CreateArtistService();
+            var model = svc.GetArtistById(id);
+
+            var newModel = model.ToUserArtistCreate();
+
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new UserArtistService(userId);
+
+            if (service.CreateUserArtist(newModel))
+            {
+                TempData["SaveResult"] = $" {model.ArtistName} was added to youre crate.";
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
         public ActionResult Details(int id)
         {
             var svc = CreateArtistService();
@@ -118,6 +136,12 @@ namespace DiscographyTracker.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new ArtistService(userId);
+            return service;
+        }
+        private UserArtistService CreateUserArtistService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new UserArtistService(userId);
             return service;
         }
     }
