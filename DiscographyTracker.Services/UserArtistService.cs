@@ -51,17 +51,22 @@ namespace DiscographyTracker.Services
                     };
             }
         }
-            public bool CreateUserArtist(UserArtistCreate model)
+        public bool CreateUserArtist(UserArtistCreate model)
         {
             var entity =
-                new UserArtist()
-                {
-                    ArtistID = model.ArtistID,
-                    UserID = _userId.ToString()
-                };
+            new UserArtist()
+            {
+                ArtistID = model.ArtistID,
+                UserID = _userId.ToString()
+            };
             using (var db = new ApplicationDbContext())
             {
-                db.UserArtists.Add(entity);
+                if (db.UserArtists.Any(e => e.ArtistID.Equals(entity.ArtistID)))
+                {
+                    return false;
+                }
+                else
+                    db.UserArtists.Add(entity);
                 return db.SaveChanges() == 1;
             }
         }

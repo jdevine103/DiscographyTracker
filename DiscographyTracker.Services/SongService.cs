@@ -11,7 +11,7 @@ namespace DiscographyTracker.Services
     public class SongService
     {
         private readonly Guid _userId;
-
+        public SongService() { }
         public SongService(Guid userId)
         {
             _userId = userId;

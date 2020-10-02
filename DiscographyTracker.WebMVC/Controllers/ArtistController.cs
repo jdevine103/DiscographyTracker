@@ -15,8 +15,7 @@ namespace DiscographyTracker.WebMVC.Controllers
         // GET: Artist
         public ActionResult Index()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ArtistService(userId);
+            var service = new ArtistService();
             var model = service.GetArtists();
 
             return View(model);
@@ -80,16 +79,22 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             if (service.CreateUserArtist(newModel))
             {
-                TempData["SaveResult"] = $" {model.ArtistName} was added to youre crate.";
+                TempData["SaveResult"] = $" {model.ArtistName} was added to your crate.";
                 return RedirectToAction("Index");
             }
+            else
+            {
+                TempData["SaveResult"] = $" {model.ArtistName} is already in your crate.";
+                return RedirectToAction("Index");
+            }
+
 
             return View(model);
         }
         public ActionResult Details(int id)
         {
-            var svc = CreateArtistService();
-            var model = svc.GetArtistById(id);
+            var service = new ArtistService();
+            var model = service.GetArtistById(id);
 
             return View(model);
         }

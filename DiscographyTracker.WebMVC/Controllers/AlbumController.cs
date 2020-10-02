@@ -17,8 +17,7 @@ namespace DiscographyTracker.WebMVC.Controllers
         // GET: Album
         public ActionResult Index()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new AlbumService(userId);
+            var service = new AlbumService();
             var model = service.GetAlbums();
 
             return View(model);
@@ -42,8 +41,8 @@ namespace DiscographyTracker.WebMVC.Controllers
         }        
         public ActionResult Details(int id)
         {
-            var svc = CreateAlbumService();
-            var model = svc.GetAlbumById(id);
+            var service = new AlbumService();
+            var model = service.GetAlbumById(id);
 
             return View(model);
         }

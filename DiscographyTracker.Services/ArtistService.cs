@@ -11,8 +11,8 @@ namespace DiscographyTracker.Services
     public class ArtistService
     {
         private readonly Guid _userId;
-
-        public ArtistService(Guid userId)
+        public ArtistService() { }
+            public ArtistService(Guid userId)
         {
             _userId = userId;
         }
