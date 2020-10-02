@@ -87,9 +87,6 @@ namespace DiscographyTracker.WebMVC.Controllers
                 TempData["SaveResult"] = $" {model.ArtistName} is already in your crate.";
                 return RedirectToAction("Index");
             }
-
-
-            return View(model);
         }
         public ActionResult Details(int id)
         {

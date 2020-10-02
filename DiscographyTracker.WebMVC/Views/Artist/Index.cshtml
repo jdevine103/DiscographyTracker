@@ -10,33 +10,29 @@
     @Html.ActionLink("Create New Artist", "Create", null, new { @class = "btn btn-primary btn-large" })
     @Html.ActionLink("Create New Artist and add Albums", "CreateWithAlbum", null, new { @class = "btn btn-primary btn-large" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ArtistID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArtistName)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+        <div class="col-sm">
+            <div class="panel panel-primary">
+                @foreach (var item in Model)
+                {
+                    <div class="panel col-sm">
+                        <div class="panel-heading">
+                            <h4>@item.ArtistName</h4>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArtistID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArtistName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ArtistID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ArtistID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ArtistID }) |
-            @Html.ActionLink("Add to My Crate", "AddToCrate", new { id = item.ArtistID }) |
-            @Html.ActionLink("Add album", "AddAlbum", new { id = item.ArtistID }) 
-        </td>
-    </tr>
-}
+                            <div class="panel-body">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ArtistID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ArtistID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ArtistID }) |
+                                @Html.ActionLink("Add album", "AddAlbum", new { id = item.ArtistID })
+                            </div>
+                            <div class="panel-footer">
+                                @Html.ActionLink("Add to My Crate", "AddToCrate", new { id = item.ArtistID }, new { @class = "btn btn-primary btn-large" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    
+</div>
 
-</table>
