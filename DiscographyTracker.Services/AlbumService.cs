@@ -16,7 +16,7 @@ namespace DiscographyTracker.Services
         {
             _userId = userId;
         }
-        public bool CreateAlbum(AlbumCreate model)
+        public Album CreateAlbum(AlbumCreate model)
         {
             var entity =
                 new Album()
@@ -28,7 +28,8 @@ namespace DiscographyTracker.Services
             using (var db = new ApplicationDbContext())
             {
                 db.Albums.Add(entity);
-                return db.SaveChanges() == 1;
+                db.SaveChanges();
+                return entity;
             }
         }
         public IEnumerable<AlbumListItem> GetAlbums()

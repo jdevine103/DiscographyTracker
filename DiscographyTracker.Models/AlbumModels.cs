@@ -18,6 +18,7 @@ namespace DiscographyTracker.Models
     }
     public class AlbumCreate
     {
+        public int AlbumID { get; set; }
         public int ArtistID { get; set; }
         [Required]
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
@@ -27,12 +28,23 @@ namespace DiscographyTracker.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:2020-01-01}", ApplyFormatInEditMode = true)]
         public DateTimeOffset ReleaseDate { get; set; }
+
+        public AlbumEdit ToAlbumEdit()
+        {
+            AlbumEdit editModel = new AlbumEdit();
+
+            editModel.AlbumID = AlbumID;
+            editModel.ArtistID = ArtistID;
+            editModel.AlbumTitle = AlbumTitle;
+            editModel.ReleaseDate = ReleaseDate;
+
+            return editModel;
+        }
     }
     public class AlbumEdit
     {
         public int AlbumID { get; set; }
         public int ArtistID { get; set; }
-        [Required]
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Album Title")]
         public string AlbumTitle { get; set; }

@@ -39,7 +39,7 @@ namespace DiscographyTracker.WebMVC.Controllers
             service.CreateAlbum(model);
 
             return RedirectToAction("Index");
-        }
+        }        
         public ActionResult Details(int id)
         {
             var svc = CreateAlbumService();

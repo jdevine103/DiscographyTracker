@@ -1,0 +1,32 @@
+﻿@model IEnumerable<DiscographyTracker.Models.UserArtistListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add an Artist to your Crate", "Index", "Artist")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtistName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtistName)
+        </td>
+        <td>
+            @Html.ActionLink("Albums", "Details", "Artist", new { id=item.ArtistID }, null) |
+            @Html.ActionLink("Remove from Crate", "Delete", new { id = item.UserArtistID })
+        </td>
+    </tr>
+}
+
+</table>
