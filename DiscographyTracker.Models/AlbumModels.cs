@@ -67,4 +67,37 @@ namespace DiscographyTracker.Models
         public DateTimeOffset ReleaseDate { get; set; }
         public IEnumerable<SongDetail> Songs { get; set; }
     }
+    public class UserAlbumCreate
+    {
+        public int UserAlbumID { get; set; }
+        public string UserID { get; set; }
+        public int AlbumID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }
+        public class UserAlbumListItem
+    {
+        public int UserAlbumID { get; set; }
+        public string UserID { get; set; }
+        public int AlbumID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }
+        public class UserAlbumEdit
+    {
+        public int UserAlbumID { get; set; }
+        public string UserID { get; set; }
+        public int AlbumID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }
+        public class UserAlbumDetail
+    {
+        public int UserAlbumID { get; set; }
+        public string UserID { get; set; }
+        public int AlbumID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }
+
 }

@@ -46,6 +46,7 @@ namespace DiscographyTracker.Models
         [Display(Name = "Artist Name")]
         public string ArtistName { get; set; }
         public IEnumerable<AlbumDetail> Albums { get; set; }
+        public IEnumerable<SongDetail> Songs { get; set; }
         public int AlbumCount
         {
             get
@@ -60,13 +61,6 @@ namespace DiscographyTracker.Models
             return userArtistCreate;
         }
     }
-    public class UserArtistListItem
-    {
-        public string ArtistName {get; set; }
-        public string UserID { get; set; }
-        public int UserArtistID { get; set; }
-        public int ArtistID { get; set; }
-    }
     public class UserArtistCreate
     {
         public string UserID { get; set; }
@@ -74,6 +68,14 @@ namespace DiscographyTracker.Models
         [Required]
         public int ArtistID { get; set; }
     }
+    public class UserArtistListItem
+    {
+        public string ArtistName {get; set; }
+        public string UserID { get; set; }
+        public int UserArtistID { get; set; }
+        public int ArtistID { get; set; }
+    }
+
     public class UserArtistEdit
     {
         public string UserID { get; set; }

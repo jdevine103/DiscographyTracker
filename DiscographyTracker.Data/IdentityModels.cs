@@ -40,6 +40,8 @@ namespace DiscographyTracker.Data
         public DbSet<Album> Albums { get; set; } 
         public DbSet<Song> Songs { get; set; }
         public DbSet<UserArtist> UserArtists { get; set; }
+        public DbSet<UserAlbum> UserAlbums { get; set; }
+        public DbSet<UserSong> UserSongs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

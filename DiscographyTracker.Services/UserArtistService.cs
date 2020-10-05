@@ -59,6 +59,7 @@ namespace DiscographyTracker.Services
                 ArtistID = model.ArtistID,
                 UserID = _userId.ToString()
             };
+
             using (var db = new ApplicationDbContext())
             {
                 if (db.UserArtists.Any(e => e.ArtistID.Equals(entity.ArtistID)))
@@ -66,7 +67,10 @@ namespace DiscographyTracker.Services
                     return false;
                 }
                 else
+                {
                     db.UserArtists.Add(entity);
+                    
+                }
                 return db.SaveChanges() == 1;
             }
         }
@@ -83,6 +87,11 @@ namespace DiscographyTracker.Services
 
                 return ctx.SaveChanges() == 1;
             }
+        }
+        private UserAlbumService CreateUserAlbumService()
+        {
+            var service = new UserAlbumService(_userId);
+            return service;
         }
     }
 }

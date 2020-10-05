@@ -4,30 +4,30 @@
     ViewBag.Title = "Details";
 }
 
-<h2>@Model.ArtistName</h2>
+<h2>@Model.ArtistName's Discography</h2>
 
 <div>
     <hr />
     <h4>Album Count: @Model.AlbumCount</h4>
     <hr />
 </div>
-<div class="container">
+
+<div class="row">
     @foreach (var item in Model.Albums)
     {
-        <div class="row">
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="~/Content/defaultassets/default_album.jpg">
-                    <div class="caption">
-                        <h3>@item.AlbumTitle</h3>
-                        <p>Release Date: @item.ReleaseDate</p>
-                        <p><a href="#" class="btn btn-default" role="button">Songs</a></p>
-                    </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="~/Content/defaultassets/default_album.jpg">
+                <div class="caption">
+                    <h3>@item.AlbumTitle</h3>
+                    <p>Release Date: @item.ReleaseDate</p>
+                    <p><a href="#" class="btn btn-default" role="button">Songs</a></p>
                 </div>
             </div>
         </div>
     }
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID }) |
     @Html.ActionLink("Delete Artist", "Delete", new { id = Model.ArtistID }) |

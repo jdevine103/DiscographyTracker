@@ -34,60 +34,39 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
-        public ActionResult AddAlbum(int id)
-        {
-            AlbumCreate model = new AlbumCreate();
-            model.ArtistID = id;
-            var svc = CreateAlbumService();
-            Album newAlbum = svc.CreateAlbum(model);
-            //this does not pass through to POST
-            id = newAlbum.AlbumID;
+        //public ActionResult AddAlbum(int id)
+        //{
+        //    AlbumCreate model = new AlbumCreate();
+        //    model.ArtistID = id;
+        //    var svc = CreateAlbumService();
+        //    Album newAlbum = svc.CreateAlbum(model);
+        //    //this does not pass through to POST
+        //    id = newAlbum.AlbumID;
             
-            return View(model);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddAlbum(int id, AlbumCreate model)
-        {
-            if (!ModelState.IsValid) return View(model);
+        //    return View(model);
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddAlbum(int id, AlbumCreate model)
+        //{
+        //    if (!ModelState.IsValid) return View(model);
 
-            if (model.ArtistID != id)
-            {
-                ModelState.AddModelError("", "Id Mismatch");
-                return View(model);
-            }
-            AlbumEdit editModel = model.ToAlbumEdit();
+        //    if (model.ArtistID != id)
+        //    {
+        //        ModelState.AddModelError("", "Id Mismatch");
+        //        return View(model);
+        //    }
+        //    AlbumEdit editModel = model.ToAlbumEdit();
             
-            //assign editModel.AlbumID to most recet entry?? seems improper 
+        //    //assign editModel.AlbumID to most recet entry?? seems improper 
             
-            var service = CreateAlbumService();
-            if (service.UpdateAlbum(editModel))
-            {
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
-        public ActionResult AddToCrate(int id)
-        {
-            var svc = CreateArtistService();
-            var model = svc.GetArtistById(id);
-
-            var newModel = model.ToUserArtistCreate();
-
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new UserArtistService(userId);
-
-            if (service.CreateUserArtist(newModel))
-            {
-                TempData["SaveResult"] = $" {model.ArtistName} was added to your crate.";
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                TempData["SaveResult"] = $" {model.ArtistName} is already in your crate.";
-                return RedirectToAction("Index");
-            }
-        }
+        //    var service = CreateAlbumService();
+        //    if (service.UpdateAlbum(editModel))
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(model);
+        //}
         public ActionResult Details(int id)
         {
             var service = new ArtistService();
@@ -173,17 +152,5 @@ namespace DiscographyTracker.WebMVC.Controllers
             var service = new ArtistService(userId);
             return service;
         }        
-        private AlbumService CreateAlbumService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new AlbumService(userId);
-            return service;
-        }
-        private UserArtistService CreateUserArtistService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new UserArtistService(userId);
-            return service;
-        }
     }
 }

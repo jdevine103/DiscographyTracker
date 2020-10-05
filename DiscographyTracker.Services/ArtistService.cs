@@ -52,7 +52,12 @@ namespace DiscographyTracker.Services
                             {
                                 AlbumID = k.AlbumID,
                                 AlbumTitle = k.AlbumTitle,
-                                ReleaseDate = k.ReleaseDate
+                                ReleaseDate = k.ReleaseDate,
+                                Songs = k.Songs.Select(j => new SongDetail
+                                {
+                                    SongID = j.SongID,
+                                    SongName = j.SongName
+                                })
                             })
                         });
                 return query.ToArray();
@@ -75,7 +80,12 @@ namespace DiscographyTracker.Services
                         {
                             AlbumID = e.AlbumID,
                             AlbumTitle = e.AlbumTitle,
-                            ReleaseDate = e.ReleaseDate
+                            ReleaseDate = e.ReleaseDate,
+                            Songs = e.Songs.Select(j => new SongDetail
+                            {
+                                SongID = j.SongID,
+                                SongName = j.SongName
+                            })
                         }).ToArray()
                     };
             }

@@ -57,31 +57,14 @@
     <Compile Include="Album.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202009301753287_InitialCreate.cs" />
-    <Compile Include="Migrations\202009301753287_InitialCreate.Designer.cs">
-      <DependentUpon>202009301753287_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010021300484_AlbumAnnotations.cs" />
-    <Compile Include="Migrations\202010021300484_AlbumAnnotations.Designer.cs">
-      <DependentUpon>202010021300484_AlbumAnnotations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Song.cs" />
-    <Compile Include="UserArtist.cs" />
+    <Compile Include="JunctionClasses.cs" />
     <Compile Include="UserCrate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009301753287_InitialCreate.resx">
-      <DependentUpon>202009301753287_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010021300484_AlbumAnnotations.resx">
-      <DependentUpon>202010021300484_AlbumAnnotations.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

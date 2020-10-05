@@ -42,3 +42,18 @@ textarea {
     padding-right: .7rem;
     text-shadow: 0 0 10px white, 0 0 20px white;
 }
+
+/* --home page-- */
+.jumbotron {
+    text-align: center;
+}
+.jumbotron img {
+    max-width: 50%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.jumbotron p {
+    padding-top: 2rem;
+}

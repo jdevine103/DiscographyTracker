@@ -47,4 +47,44 @@ namespace DiscographyTracker.Models
         public string SongName { get; set; }
         public bool HaveListened { get; set; }
     }
+    public class UserSongListItem
+    {
+        public int UserAlbumID { get; set; }
+
+        public string UserID { get; set; }
+
+        public int SongID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }    
+    public class UserSongCreate
+    {
+        public int UserAlbumID { get; set; }
+
+        public string UserID { get; set; }
+
+        public int SongID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }    
+    public class UserSongEdit
+    {
+        public int UserAlbumID { get; set; }
+
+        public string UserID { get; set; }
+
+        public int SongID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }    
+    public class UserSongDetail
+    {
+        public int UserAlbumID { get; set; }
+
+        public string UserID { get; set; }
+
+        public int SongID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }
 }

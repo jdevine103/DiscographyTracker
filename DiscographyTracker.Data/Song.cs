@@ -19,6 +19,5 @@ namespace DiscographyTracker.Data
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Song Name")]
         public string SongName { get; set; }
-        public bool HaveListened { get; set; }
     }
 }
