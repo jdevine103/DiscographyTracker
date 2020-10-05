@@ -10,14 +10,17 @@
     @Html.ActionLink("Add New Artist", "Create", null, new { @class = "btn btn-primary btn-large" })
 </p>
 <div class="container">
-        <div class="col-sm">
-            <div class="panel panel-primary">
-                @foreach (var item in Model)
-                {
-                    <div class="panel col-sm">
-                        <div class="panel-heading">
-                            <h4>@item.ArtistName</h4>
-
+    @foreach (var item in Model)
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel col-xs">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> - @item.ArtistName</a>
+                        </h4>
+                        <div id="collapse1" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <h6>Album Count: @item.AlbumCount</h6>
                             </div>
@@ -27,9 +30,11 @@
                             </div>
                         </div>
                     </div>
-                }
+                </div>
             </div>
         </div>
-    
+    }
 </div>
+
+
 

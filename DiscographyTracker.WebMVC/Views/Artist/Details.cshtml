@@ -4,39 +4,29 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Model.ArtistName</h2>
 
 <div>
-    <h4>ArtistDetail</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtistName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ArtistName)
-        </dd>        
-        <dt>
-            @Html.DisplayNameFor(model => model.AlbumCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AlbumCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Albums)
-        </dt>
-
-        @foreach (var album in Model.Albums)
-        {
-            <dd>
-                @Html.ActionLink($"{album.AlbumTitle}", "Details", "Album", new { id = album.AlbumID }, null)
-            </dd>
-        }
-
-    </dl>
+    <h4>Album Count: @Model.AlbumCount</h4>
+    <hr />
+</div>
+<div class="container">
+    @foreach (var item in Model.Albums)
+    {
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="~/Content/defaultassets/default_album.jpg">
+                    <div class="caption">
+                        <h3>@item.AlbumTitle</h3>
+                        <p>Release Date: @item.ReleaseDate</p>
+                        <p><a href="#" class="btn btn-default" role="button">Songs</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID }) |

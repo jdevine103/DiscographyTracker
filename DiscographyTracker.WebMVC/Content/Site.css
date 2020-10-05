@@ -22,3 +22,23 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* --navbar--*/
+.navbar-header {
+    color: white !important;
+}
+.navbar-nav li a {
+    color: white !important;
+    font-weight: 600;
+    text-align: left;
+    transition: .4s;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+    text-shadow: 0 0 10px white, 0 0 20px white;
+}
+
+.navbar-nav li a:hover, .navbar-nav li a:active {
+    padding-right: .7rem;
+    text-shadow: 0 0 10px white, 0 0 20px white;
+}
