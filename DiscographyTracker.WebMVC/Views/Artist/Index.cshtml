@@ -4,11 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>All Artists</h2>
 
 <p>
-    @Html.ActionLink("Create New Artist", "Create", null, new { @class = "btn btn-primary btn-large" })
-    @Html.ActionLink("Create New Artist and add Albums", "CreateWithAlbum", null, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Add New Artist", "Create", null, new { @class = "btn btn-primary btn-large" })
 </p>
 <div class="container">
         <div class="col-sm">
@@ -20,12 +19,10 @@
                             <h4>@item.ArtistName</h4>
 
                             <div class="panel-body">
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ArtistID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ArtistID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ArtistID }) |
-                                @Html.ActionLink("Add album", "AddAlbum", new { id = item.ArtistID })
+                                <h6>Album Count: @item.AlbumCount</h6>
                             </div>
                             <div class="panel-footer">
+                                @Html.ActionLink("Artist Info", "Details", new { id = item.ArtistID }, new { @class = "btn btn-primary btn-large" })
                                 @Html.ActionLink("Add to My Crate", "AddToCrate", new { id = item.ArtistID }, new { @class = "btn btn-primary btn-large" })
                             </div>
                         </div>

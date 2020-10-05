@@ -47,7 +47,13 @@ namespace DiscographyTracker.Services
                         new ArtistListItem
                         {
                             ArtistID = e.ArtistID,
-                            ArtistName = e.ArtistName
+                            ArtistName = e.ArtistName,
+                            Albums = e.Albums.Select(k => new AlbumDetail
+                            {
+                                AlbumID = k.AlbumID,
+                                AlbumTitle = k.AlbumTitle,
+                                ReleaseDate = k.ReleaseDate
+                            })
                         });
                 return query.ToArray();
             }

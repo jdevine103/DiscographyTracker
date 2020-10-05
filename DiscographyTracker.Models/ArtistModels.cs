@@ -13,6 +13,14 @@ namespace DiscographyTracker.Models
         public int ArtistID { get; set; }
         [Display(Name = "Artist Name")]
         public string ArtistName { get; set; }
+        public IEnumerable<AlbumDetail> Albums { get; set; }
+        public int? AlbumCount
+        {
+            get
+            {
+                return Albums.Count();
+            }
+        }
     }
     public class ArtistCreate
     {
@@ -38,6 +46,13 @@ namespace DiscographyTracker.Models
         [Display(Name = "Artist Name")]
         public string ArtistName { get; set; }
         public IEnumerable<AlbumDetail> Albums { get; set; }
+        public int AlbumCount
+        {
+            get
+            {
+                return Albums.Count();
+            }
+        }
         public UserArtistCreate ToUserArtistCreate()
         {
             var userArtistCreate = new UserArtistCreate();

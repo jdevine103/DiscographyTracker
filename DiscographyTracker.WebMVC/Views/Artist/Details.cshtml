@@ -16,6 +16,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.ArtistName)
+        </dd>        
+        <dt>
+            @Html.DisplayNameFor(model => model.AlbumCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlbumCount)
         </dd>
 
         <dt>
@@ -33,5 +40,6 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID }) |
+    @Html.ActionLink("Delete Artist", "Delete", new { id = Model.ArtistID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
