@@ -20,15 +20,39 @@ namespace DiscographyTracker.WebMVC.Controllers.WebAPI
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new UserAlbumService(userId);
 
-            // Get the note
+            // Get the UserAlbum
             var detail = service.GetUserAlbumById(userAlbumId);
 
-            // Create the NoteEdit model instance with the new star state
+            // Create the UserAlbumEdit model instance with the new star state
+            var updatedUserAlbum =
+                new UserAlbumEdit
+                {
+                    AlbumID = detail.AlbumID,
+                    UserID = detail.UserID,
+                    UserAlbumID = detail.UserAlbumID,
+                    HaveListened = detail.HaveListened,
+                    IsFavorited = newState
+                };
+
+            // Return a value indicating whether the update succeeded
+            return service.UpdateUserAlbum(updatedUserAlbum);
+        }        
+        private bool SetListenState(int userAlbumId, bool newState)
+        {
+            // Create the service
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new UserAlbumService(userId);
+
+            // Get the UserAlbum
+            var detail = service.GetUserAlbumById(userAlbumId);
+
+            // Create the UserAlbumEdit model instance with the new Listen state
             var updatedUserAlbum =
                 new UserAlbumEdit
                 {
                     UserAlbumID = detail.UserAlbumID,
-                    IsFavorited = newState
+                    IsFavorited = detail.IsFavorited,
+                    HaveListened = newState
                 };
 
             // Return a value indicating whether the update succeeded
@@ -41,6 +65,13 @@ namespace DiscographyTracker.WebMVC.Controllers.WebAPI
 
         [Route("{id}/Star")]
         [HttpDelete]
-        public bool ToggleStarOff(int id) => SetStarState(id, false);
+        public bool ToggleStarOff(int id) => SetStarState(id, false);        
+        [Route("{id}/Listen")]
+        [HttpPut]
+        public bool ToggleListenOn(int id) => SetListenState(id, true);
+
+        [Route("{id}/Listen")]
+        [HttpDelete]
+        public bool ToggleListenOff(int id) => SetListenState(id, false);
     }
 }

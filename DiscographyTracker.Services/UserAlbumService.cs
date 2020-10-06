@@ -86,6 +86,7 @@ namespace DiscographyTracker.Services
 
                 entity.UserAlbumID = model.UserAlbumID;
                 entity.IsFavorited = model.IsFavorited;
+                entity.HaveListened = model.HaveListened;
                 return db.SaveChanges() == 1;
             }
         }

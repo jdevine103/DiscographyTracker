@@ -82,6 +82,8 @@ namespace DiscographyTracker.Models
         [UIHint("Favorited")]
         [Display(Name = "Favorited")]
         public bool IsFavorited { get; set; }
+        [UIHint("Listened")]
+        [Display(Name = "Listened")]
         public bool HaveListened { get; set; }
     }
         public class UserAlbumEdit

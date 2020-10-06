@@ -39,6 +39,7 @@ namespace DiscographyTracker.Data
 
         [DefaultValue(false)]
         public bool IsFavorited { get; set; }
+        [DefaultValue(false)]
         public bool HaveListened { get; set; }
     }
     public class UserSong

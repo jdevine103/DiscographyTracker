@@ -274,6 +274,7 @@
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\UserAlbums.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Favorited.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Listened.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

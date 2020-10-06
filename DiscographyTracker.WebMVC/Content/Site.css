@@ -39,7 +39,6 @@ textarea {
 }
 
 .navbar-nav li a:hover, .navbar-nav li a:active {
-    padding-right: .7rem;
     text-shadow: 0 0 10px white, 0 0 20px white;
 }
 
@@ -56,4 +55,9 @@ textarea {
 }
 .jumbotron p {
     padding-top: 2rem;
+}
+
+/* -- UserAlbum Panels -- */
+.icon {
+    width: 50%;
 }
