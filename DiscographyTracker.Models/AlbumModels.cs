@@ -11,6 +11,7 @@ namespace DiscographyTracker.Models
     {
         public int AlbumID { get; set; }
         public int ArtistID { get; set; }
+        public string ArtistName { get; set; }
         [Display(Name = "Album Title")]
         public string AlbumTitle { get; set; }
         [Display(Name = "Release Date")]

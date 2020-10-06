@@ -23,7 +23,7 @@ namespace DiscographyTracker.Services
                 {
                     ArtistID = model.ArtistID,
                     AlbumTitle = model.AlbumTitle,
-                    ReleaseDate = model.ReleaseDate
+                    ReleaseDate = model.ReleaseDate,
                 };
             using (var db = new ApplicationDbContext())
             {
@@ -46,7 +46,8 @@ namespace DiscographyTracker.Services
                             AlbumID = e.AlbumID,
                             ArtistID = e.ArtistID,
                             AlbumTitle = e.AlbumTitle,
-                            ReleaseDate = e.ReleaseDate
+                            ReleaseDate = e.ReleaseDate,
+                            ArtistName = e.Artist.ArtistName
                         });
                 return query.ToArray();
             }

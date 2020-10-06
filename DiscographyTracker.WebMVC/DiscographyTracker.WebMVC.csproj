@@ -201,6 +201,7 @@
     <Content Include="Content\defaultassets\default_artist.png" />
     <Content Include="Content\defaultassets\default_album.jpg" />
     <Content Include="Content\defaultassets\home_page.jpg" />
+    <Content Include="Content\defaultassets\song_default.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

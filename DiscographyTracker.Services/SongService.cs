@@ -41,9 +41,12 @@ namespace DiscographyTracker.Services
                         e =>
                         new SongListItem
                         {
-                            SongID = e.SongID,
-                            AlbumID = e.AlbumID,
+                            ArtistName = e.Album.Artist.ArtistName,
+                            AlbumTitle = e.Album.AlbumTitle,
+                            ArtistID = e.Album.ArtistID,
                             SongName = e.SongName,
+                            SongID = e.SongID,
+                            AlbumID = e.AlbumID
                         });
                 return query.ToArray();
             }

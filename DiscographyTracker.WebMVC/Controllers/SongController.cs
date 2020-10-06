@@ -57,8 +57,7 @@ namespace DiscographyTracker.WebMVC.Controllers
                 {
                     SongID = detail.SongID,
                     AlbumID = detail.AlbumID,
-                    SongName = detail.SongName,
-                    HaveListened = detail.HaveListened
+                    SongName = detail.SongName
                 };
             return View(model);
         }

@@ -50,7 +50,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Album", "Details", "Album", new { id = Model.AlbumID }, new { @class = "btn btn-primary btn-large" })
 </div>
 
 @section Scripts {
