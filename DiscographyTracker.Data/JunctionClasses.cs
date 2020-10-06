@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
@@ -16,11 +17,12 @@ namespace DiscographyTracker.Data
 
         [ForeignKey(nameof(User))]
         public string UserID { get; set; }
-        public virtual ApplicationUser User { get; set; }        
-        
+        public virtual ApplicationUser User { get; set; }
+
         [ForeignKey(nameof(Artist))]
         public int ArtistID { get; set; }
         public virtual Artist Artist { get; set; }
+        public virtual List<UserAlbum> UserAlbums{get; set;}
     }
     public class UserAlbum
     {
@@ -34,6 +36,8 @@ namespace DiscographyTracker.Data
         [ForeignKey(nameof(Album))]
         public int AlbumID { get; set; }
         public virtual Album Album { get; set; }
+
+        [DefaultValue(false)]
         public bool IsFavorited { get; set; }
         public bool HaveListened { get; set; }
     }

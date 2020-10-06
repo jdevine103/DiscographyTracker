@@ -31,9 +31,15 @@ namespace DiscographyTracker.Services
                             ArtistName = e.Artist.ArtistName,
                             UserArtistID = e.UserArtistID,
                             ArtistID = e.ArtistID,
-                            UserID = e.UserID
-                        });
-                return query.ToArray();
+                            UserID = e.UserID,
+                            UserAlbums = e.UserAlbums.Select(k => new UserAlbumDetail
+                            {
+                                AlbumID = k.AlbumID,
+                                IsFavorited = k.IsFavorited,
+                                AlbumTitle = k.Album.AlbumTitle
+                            }).ToList()
+                        }); ;
+                return query.ToList();
             }
         }
         public UserArtistDetail GetUserArtistById(int id)

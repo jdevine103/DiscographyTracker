@@ -14,7 +14,7 @@ namespace DiscographyTracker.Data
     {
         public virtual List<UserArtist> UserArtists { get; set; }
 
-        //public virtual List<UserAlbum> UserAlbums { get; set; }      
+        public virtual List<UserAlbum> UserAlbums { get; set; }      
         //public virtual List<UserSongs> UserSongs { get; set; }   
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

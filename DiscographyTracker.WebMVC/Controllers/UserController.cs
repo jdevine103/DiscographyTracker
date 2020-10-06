@@ -54,6 +54,13 @@ namespace DiscographyTracker.WebMVC.Controllers
                 return RedirectToAction("Index");
             }
         }
+        public ActionResult UserAlbums(int id)
+        {
+            var albumService = CreateUserAlbumService();
+            var model = albumService.GetUserAlbums(id);
+
+            return View(model);
+        }
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DiscographyTracker.Models.UserAlbumListItem>
+
+@{
+    ViewBag.Title = "UserAlbums";
+}
+
+<h2>UserAlbums</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAlbumID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlbumTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFavorited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HaveListened)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserAlbumID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlbumTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFavorited, new { Id = item.UserAlbumID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HaveListened)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts {
+    <script language="javascript" type="text/javascript">
+     $(document).ready(function () {
+         $("i[data-toggle='star']")
+             .css({ "cursor": "pointer" })
+             .click(function (e) {
+                 var target = $(e.target);
+                 var userAlbumId = target.attr("data-id");
+                 var starSet = target.hasClass("glyphicon-star");
+
+                 $.ajax({
+                     method: starSet ? "DELETE" : "PUT",
+                     url: "/api/userAlbum/" + userAlbumId + "/star",
+                     data: null
+                 })
+                 .done(function (r) {
+                     target.removeClass();
+                     target.addClass("glyphicon " + (starSet ? "glyphicon-star-empty" : "glyphicon-star"));
+                 })
+                 .fail(function (r) {
+                     alert("Failed to change star status");
+                 });
+             });
+     });
+    </script>
+}

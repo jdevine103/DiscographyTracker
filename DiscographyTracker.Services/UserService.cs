@@ -33,9 +33,10 @@ namespace DiscographyTracker.Services
                         ArtistID = e.ArtistID,
                         UserArtistID = e.UserArtistID,
                         UserID = _userId.ToString()
+                        //UserAlbums = entity.UserAlbums
                     });
 
-                return crate.ToArray();
+                return crate.ToList();
             }
         }
     }

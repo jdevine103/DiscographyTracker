@@ -16,19 +16,21 @@ namespace DiscographyTracker.Services
         {
             _userId = userId;
         }
-        public IEnumerable<UserAlbumListItem> GetUserAlbums()
+        public IEnumerable<UserAlbumListItem> GetUserAlbums(int id)
         {
             using (var db = new ApplicationDbContext())
             {
                 var query =
                     db.UserAlbums
-                    .Where(e => e.AlbumID > 0) //probably not proper
+                    .Where(e => e.UserID == _userId.ToString() && e.Album.ArtistID == id )
                     .Select(
                         e =>
                         new UserAlbumListItem
                         {
-                            AlbumID = e.AlbumID,
-                            UserID = e.UserID
+                            UserAlbumID = e.UserAlbumID,
+                            AlbumTitle = e.Album.AlbumTitle,
+                            IsFavorited = e.IsFavorited,
+                            HaveListened = e.HaveListened
                         });
                 return query.ToArray();
             }
@@ -44,6 +46,7 @@ namespace DiscographyTracker.Services
                 return
                     new UserAlbumDetail
                     {
+                        UserAlbumID = entity.UserAlbumID,
                         AlbumID = entity.AlbumID,
                     };
             }
@@ -71,6 +74,20 @@ namespace DiscographyTracker.Services
 
             }
             return albumCount == model.Albums.Count();
+        }
+        public bool UpdateUserAlbum(UserAlbumEdit model)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var entity =
+                    db
+                        .UserAlbums
+                        .Single(e => e.UserAlbumID == model.UserAlbumID);
+
+                entity.UserAlbumID = model.UserAlbumID;
+                entity.IsFavorited = model.IsFavorited;
+                return db.SaveChanges() == 1;
+            }
         }
         public bool DeleteUserAlbum(int id)
         {
