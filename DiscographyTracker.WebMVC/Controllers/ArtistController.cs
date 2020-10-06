@@ -15,8 +15,7 @@ namespace DiscographyTracker.WebMVC.Controllers
         // GET: Artist
         public ActionResult Index()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ArtistService(userId);
+            var service = new ArtistService();
             var model = service.GetArtists();
 
             return View(model);
@@ -35,10 +34,43 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
+        //public ActionResult AddAlbum(int id)
+        //{
+        //    AlbumCreate model = new AlbumCreate();
+        //    model.ArtistID = id;
+        //    var svc = CreateAlbumService();
+        //    Album newAlbum = svc.CreateAlbum(model);
+        //    //this does not pass through to POST
+        //    id = newAlbum.AlbumID;
+            
+        //    return View(model);
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddAlbum(int id, AlbumCreate model)
+        //{
+        //    if (!ModelState.IsValid) return View(model);
+
+        //    if (model.ArtistID != id)
+        //    {
+        //        ModelState.AddModelError("", "Id Mismatch");
+        //        return View(model);
+        //    }
+        //    AlbumEdit editModel = model.ToAlbumEdit();
+            
+        //    //assign editModel.AlbumID to most recet entry?? seems improper 
+            
+        //    var service = CreateAlbumService();
+        //    if (service.UpdateAlbum(editModel))
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(model);
+        //}
         public ActionResult Details(int id)
         {
-            var svc = CreateArtistService();
-            var model = svc.GetArtistById(id);
+            var service = new ArtistService();
+            var model = service.GetArtistById(id);
 
             return View(model);
         }
@@ -119,6 +151,6 @@ namespace DiscographyTracker.WebMVC.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new ArtistService(userId);
             return service;
-        }
+        }        
     }
 }

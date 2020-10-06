@@ -44,7 +44,9 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.AlbumID }) |
             @Html.ActionLink("Details", "Details", new { id = item.AlbumID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.AlbumID })
+            @Html.ActionLink("Delete", "Delete", new { id = item.AlbumID }) |
+            @Html.ActionLink("Add to My Crate", "AddToCrate", "Artist", new { id = item.ArtistID }, null) |
+
         </td>
     </tr>
 }

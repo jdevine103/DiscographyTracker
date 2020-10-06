@@ -18,6 +18,7 @@ namespace DiscographyTracker.Models
     }
     public class AlbumCreate
     {
+        public int AlbumID { get; set; }
         public int ArtistID { get; set; }
         [Required]
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
@@ -27,12 +28,23 @@ namespace DiscographyTracker.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:2020-01-01}", ApplyFormatInEditMode = true)]
         public DateTimeOffset ReleaseDate { get; set; }
+
+        public AlbumEdit ToAlbumEdit()
+        {
+            AlbumEdit editModel = new AlbumEdit();
+
+            editModel.AlbumID = AlbumID;
+            editModel.ArtistID = ArtistID;
+            editModel.AlbumTitle = AlbumTitle;
+            editModel.ReleaseDate = ReleaseDate;
+
+            return editModel;
+        }
     }
     public class AlbumEdit
     {
         public int AlbumID { get; set; }
         public int ArtistID { get; set; }
-        [Required]
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Album Title")]
         public string AlbumTitle { get; set; }
@@ -55,4 +67,41 @@ namespace DiscographyTracker.Models
         public DateTimeOffset ReleaseDate { get; set; }
         public IEnumerable<SongDetail> Songs { get; set; }
     }
+    public class UserAlbumCreate
+    {
+        public int UserAlbumID { get; set; }
+        public string UserID { get; set; }
+        public int AlbumID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }
+        public class UserAlbumListItem
+    {
+        public int UserAlbumID { get; set; }
+        public string AlbumTitle { get; set; }
+        [UIHint("Favorited")]
+        [Display(Name = "Favorited")]
+        public bool IsFavorited { get; set; }
+        [UIHint("Listened")]
+        [Display(Name = "Listened")]
+        public bool HaveListened { get; set; }
+    }
+        public class UserAlbumEdit
+    {
+        public int UserAlbumID { get; set; }
+        public string UserID { get; set; }
+        public int AlbumID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }
+        public class UserAlbumDetail
+    {
+        public int UserAlbumID { get; set; }
+        public string UserID { get; set; }
+        public string AlbumTitle { get; set; }
+        public int AlbumID { get; set; }
+        public bool IsFavorited { get; set; }
+        public bool HaveListened { get; set; }
+    }
+
 }

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Favorited";
+}
+
+<h2>Favorited</h2>
+
+@model bool
+
+<span>
+    <i class="glyphicon @(Model ? "glyphicon-star" : "glyphicon-star-empty")"
+       data-toggle="star"
+       data-id="@ViewBag.Id"
+       style="font-size:5rem;">
+    </i>
+</span>

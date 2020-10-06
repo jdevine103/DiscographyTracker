@@ -11,8 +11,8 @@ namespace DiscographyTracker.Services
     public class ArtistService
     {
         private readonly Guid _userId;
-
-        public ArtistService(Guid userId)
+        public ArtistService() { }
+            public ArtistService(Guid userId)
         {
             _userId = userId;
         }
@@ -47,7 +47,18 @@ namespace DiscographyTracker.Services
                         new ArtistListItem
                         {
                             ArtistID = e.ArtistID,
-                            ArtistName = e.ArtistName
+                            ArtistName = e.ArtistName,
+                            Albums = e.Albums.Select(k => new AlbumDetail
+                            {
+                                AlbumID = k.AlbumID,
+                                AlbumTitle = k.AlbumTitle,
+                                ReleaseDate = k.ReleaseDate,
+                                Songs = k.Songs.Select(j => new SongDetail
+                                {
+                                    SongID = j.SongID,
+                                    SongName = j.SongName
+                                })
+                            })
                         });
                 return query.ToArray();
             }
@@ -69,7 +80,12 @@ namespace DiscographyTracker.Services
                         {
                             AlbumID = e.AlbumID,
                             AlbumTitle = e.AlbumTitle,
-                            ReleaseDate = e.ReleaseDate
+                            ReleaseDate = e.ReleaseDate,
+                            Songs = e.Songs.Select(j => new SongDetail
+                            {
+                                SongID = j.SongID,
+                                SongName = j.SongName
+                            })
                         }).ToArray()
                     };
             }

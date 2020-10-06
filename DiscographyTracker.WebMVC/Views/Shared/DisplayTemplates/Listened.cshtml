@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Listened";
+}
+
+<h2>Listened</h2>
+
+@model bool
+
+<span>
+    <i class="glyphicon @(Model ? "glyphicon-play-circle" : "glyphicon-ok-sign")"
+       data-toggle="listen"
+       data-id="@ViewBag.Id"
+       style="font-size:5rem;">
+    </i>
+</span>

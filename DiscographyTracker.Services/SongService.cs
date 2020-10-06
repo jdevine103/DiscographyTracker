@@ -11,7 +11,7 @@ namespace DiscographyTracker.Services
     public class SongService
     {
         private readonly Guid _userId;
-
+        public SongService() { }
         public SongService(Guid userId)
         {
             _userId = userId;
@@ -23,7 +23,6 @@ namespace DiscographyTracker.Services
                 {
                     AlbumID = model.AlbumID,
                     SongName = model.SongName,
-                    HaveListened = model.HaveListened
                 };
             using (var db = new ApplicationDbContext())
             {
@@ -45,7 +44,6 @@ namespace DiscographyTracker.Services
                             SongID = e.SongID,
                             AlbumID = e.AlbumID,
                             SongName = e.SongName,
-                            HaveListened = e.HaveListened
                         });
                 return query.ToArray();
             }
@@ -66,7 +64,6 @@ namespace DiscographyTracker.Services
                         AlbumTitle = entity.Album.AlbumTitle,
                         AlbumID = entity.AlbumID,
                         SongName = entity.SongName,
-                        HaveListened = entity.HaveListened
                     };
             }
         }
@@ -82,7 +79,6 @@ namespace DiscographyTracker.Services
                 entity.SongID = model.SongID;
                 entity.AlbumID = model.AlbumID;
                 entity.SongName = model.SongName;
-                entity.HaveListened = model.HaveListened;
 
                 return db.SaveChanges() == 1;
             }

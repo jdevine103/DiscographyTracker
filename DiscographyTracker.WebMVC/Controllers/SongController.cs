@@ -17,8 +17,7 @@ namespace DiscographyTracker.WebMVC.Controllers
         // GET: Song
         public ActionResult Index()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new SongService(userId);
+            var service = new SongService();
             var model = service.GetSongs();
 
             return View(model);
@@ -42,8 +41,8 @@ namespace DiscographyTracker.WebMVC.Controllers
         }
         public ActionResult Details(int id)
         {
-            var svc = CreateSongService();
-            var model = svc.GetSongById(id);
+            var service = new SongService();
+            var model = service.GetSongById(id);
 
             return View(model);
         }

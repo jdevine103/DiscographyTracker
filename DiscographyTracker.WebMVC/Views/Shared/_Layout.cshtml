@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Discograpy Tracker</title>
+    <link href="~/Content/Site.css" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -25,6 +26,7 @@
                     <li>@Html.ActionLink("Artists", "Index", "Artist")</li>
                     <li>@Html.ActionLink("Albums", "Index", "Album")</li>
                     <li>@Html.ActionLink("Songs", "Index", "Song")</li>
+                    <li>@Html.ActionLink("My Crate", "Index", "User")</li>
                     <li>@Html.ActionLink("Help", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")

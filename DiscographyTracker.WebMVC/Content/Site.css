@@ -22,3 +22,42 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* --navbar--*/
+.navbar-header {
+    color: white !important;
+}
+.navbar-nav li a {
+    color: white !important;
+    font-weight: 600;
+    text-align: left;
+    transition: .4s;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+    text-shadow: 0 0 10px white, 0 0 20px white;
+}
+
+.navbar-nav li a:hover, .navbar-nav li a:active {
+    text-shadow: 0 0 10px white, 0 0 20px white;
+}
+
+/* --home page-- */
+.jumbotron {
+    text-align: center;
+}
+.jumbotron img {
+    max-width: 50%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.jumbotron p {
+    padding-top: 2rem;
+}
+
+/* -- UserAlbum Panels -- */
+.icon {
+    width: 50%;
+}

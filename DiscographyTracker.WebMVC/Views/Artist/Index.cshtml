@@ -4,37 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>All Artists | @Html.ActionLink("Add New Artist", "Create", null, new { @class = "btn btn-primary btn-large" })</h2>
 
-<p>
-    @Html.ActionLink("Create New Artist", "Create", null, new { @class = "btn btn-primary btn-large" })
-    @Html.ActionLink("Create New Artist and add Albums", "CreateWithAlbum", null, new { @class = "btn btn-primary btn-large" })
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ArtistID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArtistName)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="~/Content/defaultassets/default_artist.png" alt="...">
+                    <div class="caption">
+                        <h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> - @item.ArtistName</h3>
+                        <p>Album Count: @item.AlbumCount</p>
+                        <p>
+                            @Html.ActionLink("Artist Info", "Details", new { id = item.ArtistID }, new { @class = "btn btn-default btn-large" })
+                            @Html.ActionLink("Add to My Crate", "AddToCrate", "User", new { id = item.ArtistID }, new { @class = "btn btn-primary btn-large" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArtistID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArtistName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ArtistID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ArtistID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ArtistID })
-        </td>
-    </tr>
-}
 
-</table>
+
