@@ -24,7 +24,7 @@ namespace DiscographyTracker.Services
                     ctx
                         .Users
                         .FirstOrDefault(e => e.Id == _userId.ToString());
-                var svc = CreateUserAlbumService();
+
                 var crate = entity.UserArtists.Select(
                     e => new UserArtistListItem
                     {
@@ -32,7 +32,12 @@ namespace DiscographyTracker.Services
                         ArtistID = e.ArtistID,
                         UserArtistID = e.UserArtistID,
                         UserID = _userId.ToString(),
-                        UserAlbums = svc.GetUserAlbums(e.ArtistID).ToList()
+                        UserAlbums = e.User.UserAlbums.Select(j => new UserAlbumDetail
+                        {
+                            AlbumTitle = j.Album.AlbumTitle,
+                            IsFavorited = j.IsFavorited,
+                            HaveListened = j.HaveListened
+                        }).ToList()
                     });
 
                 return crate.ToList();

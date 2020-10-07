@@ -184,7 +184,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SongController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebAPI\UserAlbumController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -277,10 +276,11 @@
     <Content Include="Views\User\UserAlbums.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Favorited.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Listened.cshtml" />
+    <Content Include="Views\Crate\Index.cshtml" />
+    <Content Include="Views\Crate\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Crate\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -18,7 +18,7 @@
                         <p>Album Count: @item.AlbumCount</p>
                         <p>
                             @Html.ActionLink("Artist Info", "Details", new { id = item.ArtistID }, new { @class = "btn btn-default btn-large" })
-                            @Html.ActionLink("Add to My Crate", "AddToCrate", "User", new { id = item.ArtistID }, new { @class = "btn btn-primary btn-large" })
+                            @Html.ActionLink("Add to My Crate", "AddToCrate", "Crate", new { id = item.ArtistID }, new { @class = "btn btn-primary btn-large" })
                         </p>
                     </div>
                 </div>

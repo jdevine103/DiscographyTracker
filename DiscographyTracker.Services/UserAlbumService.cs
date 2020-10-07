@@ -22,7 +22,7 @@ namespace DiscographyTracker.Services
             {
                 var query =
                     db.UserAlbums
-                    .Where(e => e.UserID == _userId.ToString() && e.Album.ArtistID == id )
+                    .Where(e => e.UserID == _userId.ToString() && e.Album.ArtistID == id)
                     .Select(
                         e =>
                         new UserAlbumListItem
@@ -48,6 +48,8 @@ namespace DiscographyTracker.Services
                     {
                         UserAlbumID = entity.UserAlbumID,
                         AlbumID = entity.AlbumID,
+                        IsFavorited = entity.IsFavorited,
+                        HaveListened = entity.HaveListened
                     };
             }
         }
