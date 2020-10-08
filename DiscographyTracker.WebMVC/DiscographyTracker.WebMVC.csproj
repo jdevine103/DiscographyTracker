@@ -185,6 +185,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Controllers\WebAPI\UserAlbumController.cs" />
+    <Compile Include="Controllers\WebAPI\UserSongController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -279,6 +280,7 @@
     <Content Include="Views\Crate\Index.cshtml" />
     <Content Include="Views\Crate\Delete.cshtml" />
     <Content Include="Views\Crate\CrateAlbums.cshtml" />
+    <Content Include="Views\Crate\CrateSongs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

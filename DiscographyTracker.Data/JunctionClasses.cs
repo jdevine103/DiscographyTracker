@@ -24,7 +24,7 @@ namespace DiscographyTracker.Data
         public virtual Artist Artist { get; set; }
         public virtual List<UserAlbum> UserAlbums {get; set;}
     }
-    public class UserAlbum //we don't need this
+    public class UserAlbum 
     {
         [Key]
         public int UserAlbumID { get; set; }
@@ -46,7 +46,7 @@ namespace DiscographyTracker.Data
         [DefaultValue(false)]
         public bool HaveListened { get; set; }
     }
-    public class UserSong //we don't need this
+    public class UserSong
     {
         [Key]
         public int UserSongID { get; set; }

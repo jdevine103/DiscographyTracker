@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="panel-footer">
-                @Html.ActionLink("Albums", "CrateAlbums", "Crate", new { id = item.ArtistID }, null) |
+                @Html.ActionLink("Albums", "CrateAlbums", "Crate", new { id = item.UserArtistID }, null) |
                 @Html.ActionLink("Remove from Crate", "Delete", new { id = item.UserArtistID })
             </div>
         </div>

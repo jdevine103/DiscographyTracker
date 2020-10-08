@@ -58,14 +58,6 @@ namespace DiscographyTracker.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                //var user = ctx.Users.FirstOrDefault(u => u.Id == _userId.ToString());
-                //var artist = ctx.Artists.Find(id);
-
-                //user.UserArtists.Add(new UserArtist { Artist = artist });
-                //user.UserAlbums.AddRange(artist.Albums.Select(a => new UserAlbum { AlbumID = a.AlbumID }));
-
-                //var count = ctx.SaveChanges() == 1 + artist.Albums.Count;
-
                 var entity =
                     ctx
                         .UserArtists
