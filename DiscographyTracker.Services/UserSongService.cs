@@ -17,16 +17,16 @@ namespace DiscographyTracker.Services
         }
         public bool CreateUserSongs(int id)
         {
-            var svc = CreateArtistService();
-            var model = svc.GetArtistById(id);
+            var svc = CreateUserArtistService();
+            var model = svc.GetUserArtistById(id);
 
             int songCount = 0;
 
-            foreach (var album in model.Albums)
+            foreach (var album in model.UserAlbums)
             {
-                songCount += album.Songs.Count();
+                songCount += album.UserSongs.Count();
 
-                foreach (var song in album.Songs)
+                foreach (var song in album.UserSongs)
                 {
                     var entity =
                     new UserSong()
@@ -41,7 +41,7 @@ namespace DiscographyTracker.Services
                     }
                 }
             }
-            return songCount == model.Albums.Count();
+            return songCount == model.UserAlbums.Count();
         }
         public bool DeleteUserAlbum(int id)
         {
@@ -57,9 +57,9 @@ namespace DiscographyTracker.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        private ArtistService CreateArtistService()
+        private UserArtistService CreateUserArtistService()
         {
-            var service = new ArtistService(_userId);
+            var service = new UserArtistService(_userId);
             return service;
         }
     }

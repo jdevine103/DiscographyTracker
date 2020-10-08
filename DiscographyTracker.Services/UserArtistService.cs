@@ -2,6 +2,7 @@
 using DiscographyTracker.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,12 +33,25 @@ namespace DiscographyTracker.Services
                         ArtistID = e.ArtistID,
                         UserArtistID = e.UserArtistID,
                         UserID = _userId.ToString(),
-                        UserAlbums = e.User.UserAlbums.Select(j => new UserAlbumDetail
+                        UserAlbums = e.UserAlbums.Select(k => new UserAlbumDetail
                         {
-                            AlbumTitle = j.Album.AlbumTitle,
-                            IsFavorited = j.IsFavorited,
-                            HaveListened = j.HaveListened
+                            AlbumTitle = k.Album.AlbumTitle,
+                            IsFavorited = k.IsFavorited,
+                            HaveListened = k.HaveListened,
                         }).ToList()
+                        //UserAlbums = e.User.UserAlbums.Where(k => k.Album.ArtistID == e.ArtistID)
+                        //    .Select(j => new UserAlbumDetail
+                        //    {
+                        //        AlbumTitle = j.Album.AlbumTitle,
+                        //        IsFavorited = j.IsFavorited,
+                        //        HaveListened = j.HaveListened,
+                        //        UserSongs = e.User.UserSongs.Where(i => i.UserAlbumID == j.UserAlbumID)
+                        //            .Select(q => new UserSongDetail { 
+                        //                UserAlbumID = j.UserAlbumID,
+                        //                IsFavorited = j.IsFavorited,
+                        //                HaveListened = j.HaveListened
+                        //            })
+                        //    }).ToList()
                     });
 
                 return crate.ToList();
@@ -55,10 +69,16 @@ namespace DiscographyTracker.Services
                     new UserArtistDetail
                     {
                         ArtistID = entity.ArtistID,
+                        UserAlbums = entity.UserAlbums.Select(k => new UserAlbumDetail
+                        {
+                            AlbumTitle = k.Album.AlbumTitle,
+                            IsFavorited = k.IsFavorited,
+                            HaveListened = k.HaveListened,
+                        }).ToList()
                     };
             }
         }
-        public bool CreateUserArtist(UserArtistCreate model)
+        public UserArtist CreateUserArtist(UserArtistCreate model)
         {
             var entity =
             new UserArtist()
@@ -71,14 +91,14 @@ namespace DiscographyTracker.Services
             {
                 if (db.UserArtists.Any(e => e.ArtistID.Equals(entity.ArtistID)))
                 {
-                    return false;
+                    return null;
                 }
                 else
                 {
                     db.UserArtists.Add(entity);
-                    
                 }
-                return db.SaveChanges() == 1;
+                db.SaveChanges();
+                return entity;
             }
         }
         public bool DeleteUserArtist(int artistID)

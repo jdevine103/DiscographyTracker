@@ -278,6 +278,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Listened.cshtml" />
     <Content Include="Views\Crate\Index.cshtml" />
     <Content Include="Views\Crate\Delete.cshtml" />
+    <Content Include="Views\Crate\CrateAlbums.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

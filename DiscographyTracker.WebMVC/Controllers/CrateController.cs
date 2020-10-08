@@ -1,4 +1,5 @@
-﻿using DiscographyTracker.Services;
+﻿using DiscographyTracker.Data;
+using DiscographyTracker.Services;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -29,12 +30,11 @@ namespace DiscographyTracker.WebMVC.Controllers
             var albumService = CreateUserAlbumService();
             var songService = CreateUserSongService();
 
-            bool artistAdded = artistService.CreateUserArtist(newModel);
-            bool albumsAdded = albumService.CreateUserAlbums(id);
+            UserArtist artistAdded = artistService.CreateUserArtist(newModel);
+            bool albumsAdded = albumService.CreateUserAlbums(id, artistAdded.UserArtistID);
             bool songsAdded = songService.CreateUserSongs(id);
 
-
-            if (artistAdded && albumsAdded && songsAdded)
+            if (albumsAdded && songsAdded)
             {
                 TempData["SaveResult"] = $" {model.ArtistName} was added to your crate.";
                 return RedirectToAction("Index");
@@ -65,6 +65,13 @@ namespace DiscographyTracker.WebMVC.Controllers
             TempData["SaveResult"] = "The artist was deleted";
 
             return RedirectToAction("Index");
+        }
+        public ActionResult CrateAlbums(int id)
+        {
+            var albumService = CreateUserAlbumService();
+            var model = albumService.GetUserAlbums(id);
+
+            return View(model);
         }
 
         private UserArtistService CreateUserArtistService()
