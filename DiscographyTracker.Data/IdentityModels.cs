@@ -13,9 +13,8 @@ namespace DiscographyTracker.Data
     public class ApplicationUser : IdentityUser
     {
         public virtual List<UserArtist> UserArtists { get; set; }
-
         public virtual List<UserAlbum> UserAlbums { get; set; }      
-        //public virtual List<UserSongs> UserSongs { get; set; }   
+        public virtual List<UserSong> UserSongs { get; set; }   
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -45,6 +44,7 @@ namespace DiscographyTracker.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder
                 .Conventions
                 .Remove<PluralizingTableNameConvention>();

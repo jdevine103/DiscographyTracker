@@ -46,7 +46,6 @@ namespace DiscographyTracker.Models
         [Display(Name = "Artist Name")]
         public string ArtistName { get; set; }
         public IEnumerable<AlbumDetail> Albums { get; set; }
-        public IEnumerable<SongDetail> Songs { get; set; }
         public int AlbumCount
         {
             get
@@ -86,7 +85,10 @@ namespace DiscographyTracker.Models
                         k++;
                 }
                 if (k != 0)
-                    return (UserAlbums.Count() / k) * 100;
+                {
+                    double ret = (double)k / (double)UserAlbums.Count() * 100;
+                    return Convert.ToInt32(ret);
+                }
                 else
                     return 0;
             }
@@ -102,7 +104,10 @@ namespace DiscographyTracker.Models
                         k++;
                 }
                 if (k != 0)
-                    return (UserAlbums.Count() / k) * 100;
+                {
+                    double ret = (double)k / (double)UserAlbums.Count() * 100;
+                    return Convert.ToInt32(ret);
+                }
                 else
                     return 0;
             }
@@ -120,6 +125,7 @@ namespace DiscographyTracker.Models
         public string UserID { get; set; }
         public int UserArtistID { get; set; }
         public int ArtistID { get; set; }
+        public List<UserAlbumDetail> UserAlbums { get; set; }
     }
 
 }

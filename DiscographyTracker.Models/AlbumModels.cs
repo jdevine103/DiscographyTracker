@@ -86,6 +86,45 @@ namespace DiscographyTracker.Models
         [UIHint("Listened")]
         [Display(Name = "Listened")]
         public bool HaveListened { get; set; }
+        public List<UserSongDetail> UserSongs { get; set; }
+        public int AlbumFavoriteProgress
+        {
+            get
+            {
+                int k = 0;
+                for (int i = 0; i < UserSongs.Count(); i++)
+                {
+                    if (UserSongs[i].IsFavorited)
+                        k++;
+                }
+                if (k != 0)
+                {
+                    double ret = (double)k / (double)UserSongs.Count() * 100;
+                    return Convert.ToInt32(ret);
+                }
+                else
+                    return 0;
+            }
+        }
+        public int HaveListenedProgress
+        {
+            get
+            {
+                int k = 0;
+                for (int i = 0; i < UserSongs.Count(); i++)
+                {
+                    if (UserSongs[i].HaveListened)
+                        k++;
+                }
+                if (k != 0)
+                {
+                    double ret = (double)k / (double)UserSongs.Count() * 100;
+                    return Convert.ToInt32(ret);
+                }
+                else
+                    return 0;
+            }
+        }
     }
         public class UserAlbumEdit
     {
@@ -101,6 +140,15 @@ namespace DiscographyTracker.Models
         public string UserID { get; set; }
         public string AlbumTitle { get; set; }
         public int AlbumID { get; set; }
+        public IEnumerable<UserSongDetail> UserSongs { get; set; }
+
+        public int AlbumCount
+        {
+            get
+            {
+                return UserSongs.Count();
+            }
+        }
         public bool IsFavorited { get; set; }
         public bool HaveListened { get; set; }
     }

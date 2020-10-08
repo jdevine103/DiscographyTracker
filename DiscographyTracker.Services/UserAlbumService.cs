@@ -65,6 +65,7 @@ namespace DiscographyTracker.Services
                 var entity =
                 new UserAlbum()
                 {
+                    //UserArtistID = userArtistID,
                     AlbumID = album.AlbumID,
                     UserID = _userId.ToString()
                 };
@@ -73,8 +74,8 @@ namespace DiscographyTracker.Services
                     db.UserAlbums.Add(entity);
                     albumCount += db.SaveChanges();
                 }
-
             }
+
             return albumCount == model.Albums.Count();
         }
         public bool UpdateUserAlbum(UserAlbumEdit model)

@@ -74,6 +74,6 @@ namespace DiscographyTracker.WebMVC.Controllers.WebAPI
 
         [Route("{id}/Listen")]
         [HttpDelete]
-        public bool ToggleListenOff(int id) => SetListenState(id, false);
+        public bool ToggleListenOff(int id) =>  SetListenState(id, false);
     }
 }

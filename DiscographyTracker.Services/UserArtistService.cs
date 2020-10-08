@@ -2,6 +2,7 @@
 using DiscographyTracker.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,25 +20,35 @@ namespace DiscographyTracker.Services
         public IEnumerable<UserArtistListItem> GetCrate()
         {
             using (var ctx = new ApplicationDbContext())
-            {
+            {//we get our user
                 var entity =
                     ctx
                         .Users
                         .FirstOrDefault(e => e.Id == _userId.ToString());
-
-                var crate = entity.UserArtists.Select(
+                // we get our crate
+                IEnumerable<UserArtistListItem> crate = entity.UserArtists.Select(
                     e => new UserArtistListItem
                     {
                         ArtistName = e.Artist.ArtistName,
                         ArtistID = e.ArtistID,
                         UserArtistID = e.UserArtistID,
                         UserID = _userId.ToString(),
-                        UserAlbums = e.User.UserAlbums.Select(j => new UserAlbumDetail
-                        {
-                            AlbumTitle = j.Album.AlbumTitle,
-                            IsFavorited = j.IsFavorited,
-                            HaveListened = j.HaveListened
-                        }).ToList()
+                        //UserAlbums = e.Artist.Albums.SelectMany(a=> a.UserAlbums.Where(u=>u.UserID == _userId.ToString()))
+                        UserAlbums = e.User.UserAlbums.Where(k => k.Album.ArtistID == e.ArtistID)
+                            .Select(j => new UserAlbumDetail
+                            {
+                                AlbumTitle = j.Album.AlbumTitle,
+                                IsFavorited = j.IsFavorited,
+                                HaveListened = j.HaveListened
+                            }).ToList()
+                        //        UserSongs = e.User.UserSongs.Where(i => i.UserAlbumID == j.UserAlbumID)
+                        //            .Select(q => new UserSongDetail
+                        //            {
+                        //                UserAlbumID = j.UserAlbumID,
+                        //                IsFavorited = j.IsFavorited,
+                        //                HaveListened = j.HaveListened
+                        //            })
+                        //    }).ToList()
                     });
 
                 return crate.ToList();
@@ -47,6 +58,14 @@ namespace DiscographyTracker.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                //var user = ctx.Users.FirstOrDefault(u => u.Id == _userId.ToString());
+                //var artist = ctx.Artists.Find(id);
+
+                //user.UserArtists.Add(new UserArtist { Artist = artist });
+                //user.UserAlbums.AddRange(artist.Albums.Select(a => new UserAlbum { AlbumID = a.AlbumID }));
+
+                //var count = ctx.SaveChanges() == 1 + artist.Albums.Count;
+
                 var entity =
                     ctx
                         .UserArtists
@@ -55,6 +74,12 @@ namespace DiscographyTracker.Services
                     new UserArtistDetail
                     {
                         ArtistID = entity.ArtistID,
+                        //UserAlbums = entity.UserAlbums.Select(k => new UserAlbumDetail
+                        //{
+                        //    AlbumTitle = k.Album.AlbumTitle,
+                        //    IsFavorited = k.IsFavorited,
+                        //    HaveListened = k.HaveListened,
+                        //}).ToList()
                     };
             }
         }
@@ -76,7 +101,7 @@ namespace DiscographyTracker.Services
                 else
                 {
                     db.UserArtists.Add(entity);
-                    
+
                 }
                 return db.SaveChanges() == 1;
             }

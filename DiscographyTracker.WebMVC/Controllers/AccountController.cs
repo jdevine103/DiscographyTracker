@@ -450,7 +450,7 @@ namespace DiscographyTracker.WebMVC.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "User");
+            return RedirectToAction("Index", "Crate");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
