@@ -13,7 +13,6 @@ namespace DiscographyTracker.Data
     public class ApplicationUser : IdentityUser
     {
         public virtual List<UserArtist> UserArtists { get; set; }
-
         public virtual List<UserAlbum> UserAlbums { get; set; }      
         public virtual List<UserSong> UserSongs { get; set; }   
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

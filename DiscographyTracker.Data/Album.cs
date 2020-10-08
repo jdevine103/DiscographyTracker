@@ -22,5 +22,6 @@ namespace DiscographyTracker.Data
         [Display(Name = "Release Date")]
         public DateTimeOffset ReleaseDate { get; set; }
         public virtual List<Song> Songs { get; set; }
+        //public virtual List<UserAlbum> UserAlbums { get; set; }
     }
 }

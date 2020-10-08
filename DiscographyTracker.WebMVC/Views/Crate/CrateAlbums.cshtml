@@ -26,12 +26,18 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <p class="icon">
-                        @Html.DisplayFor(modelItem => item.IsFavorited, new { Id = item.UserAlbumID })
-                    </p>
-                    <p class="icon">
-                        @Html.DisplayFor(modelItem => item.HaveListened, new { Id = item.UserAlbumID })
-                    </p>
+                    <div class="row">
+                        <div class="footer-icon col-lg-6" style="text-align: center;">
+                            <p class="icon">
+                                @Html.DisplayFor(modelItem => item.IsFavorited, new { Id = item.UserAlbumID })
+                            </p>
+                        </div>
+                        <div class="footer-icon col-lg-6" style="text-align: center;">
+                            <p class="icon">
+                                @Html.DisplayFor(modelItem => item.HaveListened, new { Id = item.UserAlbumID })
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,6 +66,7 @@
                             alert("Failed to change star status");
                         });
                 });
+
         });
     </script>
 

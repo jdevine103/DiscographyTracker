@@ -24,7 +24,7 @@ namespace DiscographyTracker.Data
         public virtual Artist Artist { get; set; }
         public virtual List<UserAlbum> UserAlbums {get; set;}
     }
-    public class UserAlbum
+    public class UserAlbum //we don't need this
     {
         [Key]
         public int UserAlbumID { get; set; }
@@ -36,17 +36,17 @@ namespace DiscographyTracker.Data
         [ForeignKey(nameof(Album))]
         public int AlbumID { get; set; }
         public virtual Album Album { get; set; }
-        //[ForeignKey(nameof(UserArtist))]
-        //public int UserArtistID { get; set; }
-        //public virtual UserArtist UserArtist { get; set; }
-        //public virtual List<UserSong> UserSongs {get; set;}
+       // [ForeignKey(nameof(UserArtist))]
+       // public int UserArtistID { get; set; }
+       //// public virtual UserArtist UserArtist { get; set; }
+       // public virtual List<UserSong> UserSongs { get; set; }
 
         [DefaultValue(false)]
         public bool IsFavorited { get; set; }
         [DefaultValue(false)]
         public bool HaveListened { get; set; }
     }
-    public class UserSong
+    public class UserSong //we don't need this
     {
         [Key]
         public int UserSongID { get; set; }
