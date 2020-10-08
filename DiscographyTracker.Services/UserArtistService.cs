@@ -33,26 +33,28 @@ namespace DiscographyTracker.Services
                         ArtistID = e.ArtistID,
                         UserArtistID = e.UserArtistID,
                         UserID = _userId.ToString(),
-                        UserAlbums = e.UserAlbums.Select(k => new UserAlbumDetail
-                        {
-                            AlbumTitle = k.Album.AlbumTitle,
-                            IsFavorited = k.IsFavorited,
-                            HaveListened = k.HaveListened,
-                        }).ToList()
-                        //UserAlbums = e.User.UserAlbums.Where(k => k.Album.ArtistID == e.ArtistID)
-                        //    .Select(j => new UserAlbumDetail
-                        //    {
-                        //        AlbumTitle = j.Album.AlbumTitle,
-                        //        IsFavorited = j.IsFavorited,
-                        //        HaveListened = j.HaveListened,
-                        //        UserSongs = e.User.UserSongs.Where(i => i.UserAlbumID == j.UserAlbumID)
-                        //            .Select(q => new UserSongDetail { 
-                        //                UserAlbumID = j.UserAlbumID,
-                        //                IsFavorited = j.IsFavorited,
-                        //                HaveListened = j.HaveListened
-                        //            })
-                        //    }).ToList()
-                    });
+                        //UserAlbums = e.UserAlbums.Select(k => new UserAlbumDetail
+                        //{
+                        //    AlbumTitle = k.Album.AlbumTitle,
+                        //    IsFavorited = k.IsFavorited,
+                        //    HaveListened = k.HaveListened,
+                        //}).ToList()
+                        UserAlbums = e.User.UserAlbums.Where(k => k.Album.ArtistID == e.ArtistID)
+                            .Select(j => new UserAlbumDetail
+                            {
+                                AlbumTitle = j.Album.AlbumTitle,
+                                IsFavorited = j.IsFavorited,
+                                HaveListened = j.HaveListened
+                            }).ToList()
+                                //        UserSongs = e.User.UserSongs.Where(i => i.UserAlbumID == j.UserAlbumID)
+                                //            .Select(q => new UserSongDetail
+                                //            {
+                                //                UserAlbumID = j.UserAlbumID,
+                                //                IsFavorited = j.IsFavorited,
+                                //                HaveListened = j.HaveListened
+                                //            })
+                                //    }).ToList()
+                            });
 
                 return crate.ToList();
             }
@@ -69,16 +71,16 @@ namespace DiscographyTracker.Services
                     new UserArtistDetail
                     {
                         ArtistID = entity.ArtistID,
-                        UserAlbums = entity.UserAlbums.Select(k => new UserAlbumDetail
-                        {
-                            AlbumTitle = k.Album.AlbumTitle,
-                            IsFavorited = k.IsFavorited,
-                            HaveListened = k.HaveListened,
-                        }).ToList()
+                        //UserAlbums = entity.UserAlbums.Select(k => new UserAlbumDetail
+                        //{
+                        //    AlbumTitle = k.Album.AlbumTitle,
+                        //    IsFavorited = k.IsFavorited,
+                        //    HaveListened = k.HaveListened,
+                        //}).ToList()
                     };
             }
         }
-        public UserArtist CreateUserArtist(UserArtistCreate model)
+        public bool CreateUserArtist(UserArtistCreate model)
         {
             var entity =
             new UserArtist()
@@ -91,14 +93,14 @@ namespace DiscographyTracker.Services
             {
                 if (db.UserArtists.Any(e => e.ArtistID.Equals(entity.ArtistID)))
                 {
-                    return null;
+                    return false;
                 }
                 else
                 {
                     db.UserArtists.Add(entity);
+
                 }
-                db.SaveChanges();
-                return entity;
+                return db.SaveChanges() == 1;
             }
         }
         public bool DeleteUserArtist(int artistID)

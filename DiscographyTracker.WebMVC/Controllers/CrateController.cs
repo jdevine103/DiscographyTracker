@@ -30,11 +30,11 @@ namespace DiscographyTracker.WebMVC.Controllers
             var albumService = CreateUserAlbumService();
             var songService = CreateUserSongService();
 
-            UserArtist artistAdded = artistService.CreateUserArtist(newModel);
-            bool albumsAdded = albumService.CreateUserAlbums(id, artistAdded.UserArtistID);
+            bool artistAdded = artistService.CreateUserArtist(newModel);
+            bool albumsAdded = albumService.CreateUserAlbums(id);
             bool songsAdded = songService.CreateUserSongs(id);
 
-            if (albumsAdded && songsAdded)
+            if (artistAdded && albumsAdded && songsAdded)
             {
                 TempData["SaveResult"] = $" {model.ArtistName} was added to your crate.";
                 return RedirectToAction("Index");

@@ -53,7 +53,7 @@ namespace DiscographyTracker.Services
                     };
             }
         }
-        public bool CreateUserAlbums(int id, int userArtistID)
+        public bool CreateUserAlbums(int id)
         {
             var svc = CreateArtistService();
             var model = svc.GetArtistById(id);
@@ -65,7 +65,7 @@ namespace DiscographyTracker.Services
                 var entity =
                 new UserAlbum()
                 {
-                    UserArtistID = userArtistID,
+                    //UserArtistID = userArtistID,
                     AlbumID = album.AlbumID,
                     UserID = _userId.ToString()
                 };
