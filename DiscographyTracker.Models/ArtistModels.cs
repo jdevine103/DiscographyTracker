@@ -75,6 +75,38 @@ namespace DiscographyTracker.Models
         public int UserArtistID { get; set; }
         public int ArtistID { get; set; }
         public List<UserAlbumDetail> UserAlbums { get; set; }
+        public int AlbumFavoriteProgress
+        {
+            get
+            {
+                int k = 0;
+                for (int i = 0; i < UserAlbums.Count(); i++)
+                {
+                    if (UserAlbums[i].IsFavorited)
+                        k++;
+                }
+                if (k != 0)
+                    return (UserAlbums.Count() / k) * 100;
+                else
+                    return 0;
+            }
+        }
+        public int HaveListenedProgress
+        {
+            get
+            {
+                int k = 0;
+                for (int i = 0; i < UserAlbums.Count(); i++)
+                {
+                    if (UserAlbums[i].HaveListened)
+                        k++;
+                }
+                if (k != 0)
+                    return (UserAlbums.Count() / k) * 100;
+                else
+                    return 0;
+            }
+        }
     }
 
     public class UserArtistEdit

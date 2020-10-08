@@ -16,30 +16,31 @@ namespace DiscographyTracker.Services
         {
             _userId = userId;
         }
-
-        public IEnumerable<UserArtistListItem> GetUserArtists()
+        public IEnumerable<UserArtistListItem> GetCrate()
         {
-            using (var db = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
-                var query =
-                    db.UserArtists
-                    .Where(e => e.ArtistID > 0) //probably not proper
-                    .Select(
-                        e =>
-                        new UserArtistListItem
+                var entity =
+                    ctx
+                        .Users
+                        .FirstOrDefault(e => e.Id == _userId.ToString());
+
+                var crate = entity.UserArtists.Select(
+                    e => new UserArtistListItem
+                    {
+                        ArtistName = e.Artist.ArtistName,
+                        ArtistID = e.ArtistID,
+                        UserArtistID = e.UserArtistID,
+                        UserID = _userId.ToString(),
+                        UserAlbums = e.User.UserAlbums.Select(j => new UserAlbumDetail
                         {
-                            ArtistName = e.Artist.ArtistName,
-                            UserArtistID = e.UserArtistID,
-                            ArtistID = e.ArtistID,
-                            UserID = e.UserID,
-                            UserAlbums = e.UserAlbums.Select(k => new UserAlbumDetail
-                            {
-                                AlbumID = k.AlbumID,
-                                IsFavorited = k.IsFavorited,
-                                AlbumTitle = k.Album.AlbumTitle
-                            }).ToList()
-                        }); ;
-                return query.ToList();
+                            AlbumTitle = j.Album.AlbumTitle,
+                            IsFavorited = j.IsFavorited,
+                            HaveListened = j.HaveListened
+                        }).ToList()
+                    });
+
+                return crate.ToList();
             }
         }
         public UserArtistDetail GetUserArtistById(int id)

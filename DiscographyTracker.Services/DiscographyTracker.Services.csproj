@@ -72,7 +72,6 @@
     <Compile Include="SongService.cs" />
     <Compile Include="UserAlbumService.cs" />
     <Compile Include="UserArtistService.cs" />
-    <Compile Include="UserService.cs" />
     <Compile Include="UserSongService.cs" />
   </ItemGroup>
   <ItemGroup>

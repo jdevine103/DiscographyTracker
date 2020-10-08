@@ -4,51 +4,24 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>All Albums | @Html.ActionLink("Add album to an artist", "Create", null, new { @class = "btn btn-primary btn-large" })</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AlbumID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArtistID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AlbumTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </th>        
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AlbumID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArtistID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AlbumTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReleaseDate)
-        </td>
-
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.AlbumID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.AlbumID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.AlbumID }) |
-            @Html.ActionLink("Add to My Crate", "AddToCrate", "Artist", new { id = item.ArtistID }, null) |
-
-        </td>
-    </tr>
-}
-
-</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="~/Content/defaultassets/default_album.jpg">
+                <div class="caption">
+                    <h3>@item.AlbumTitle</h3>
+                    <h4>@item.ArtistName</h4>
+                    <p>Release Date: @item.ReleaseDate</p>
+                    <p>
+                    @Html.ActionLink("Album Info", "Details", "Album", new { id = item.AlbumID }, new { @class = "btn btn-default btn-large" }) |
+                    @Html.ActionLink($"Add {item.ArtistName} to My Crate", "AddToCrate", "User", new { id = item.ArtistID }, new { @class = "btn btn-primary btn-large" })
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

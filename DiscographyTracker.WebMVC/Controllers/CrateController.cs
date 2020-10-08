@@ -1,6 +1,5 @@
 ﻿using DiscographyTracker.Services;
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security.Provider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +8,15 @@ using System.Web.Mvc;
 
 namespace DiscographyTracker.WebMVC.Controllers
 {
-    public class UserController : Controller
+    public class CrateController : Controller
     {
-        // GET: User
+        // GET: Crate
         public ActionResult Index()
         {
-            try
-            {
-                var userId = Guid.Parse(User.Identity.GetUserId());
-                var service = new UserService(userId);
-                var model = service.GetCrate();
-                return View(model);
-            }
-            catch (Exception)
-            {
-
-                return RedirectToAction("Account", "Login");
-            }
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new UserArtistService(userId);
+            var model = service.GetCrate();
+            return View(model);
         }
         public ActionResult AddToCrate(int id)
         {
@@ -43,7 +34,7 @@ namespace DiscographyTracker.WebMVC.Controllers
             bool songsAdded = songService.CreateUserSongs(id);
 
 
-            if(artistAdded && albumsAdded && songsAdded)
+            if (artistAdded && albumsAdded && songsAdded)
             {
                 TempData["SaveResult"] = $" {model.ArtistName} was added to your crate.";
                 return RedirectToAction("Index");
@@ -53,13 +44,6 @@ namespace DiscographyTracker.WebMVC.Controllers
                 TempData["SaveResult"] = $" {model.ArtistName} is already in your crate.";
                 return RedirectToAction("Index");
             }
-        }
-        public ActionResult UserAlbums(int id)
-        {
-            var albumService = CreateUserAlbumService();
-            var model = albumService.GetUserAlbums(id);
-
-            return View(model);
         }
         [ActionName("Delete")]
         public ActionResult Delete(int id)
@@ -82,6 +66,7 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
+
         private UserArtistService CreateUserArtistService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
@@ -93,7 +78,7 @@ namespace DiscographyTracker.WebMVC.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new UserAlbumService(userId);
             return service;
-        }        
+        }
         private UserSongService CreateUserSongService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

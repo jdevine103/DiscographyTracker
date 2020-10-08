@@ -50,6 +50,8 @@ namespace DiscographyTracker.WebMVC.Controllers.WebAPI
             var updatedUserAlbum =
                 new UserAlbumEdit
                 {
+                    AlbumID = detail.AlbumID,
+                    UserID = detail.UserID,
                     UserAlbumID = detail.UserAlbumID,
                     IsFavorited = detail.IsFavorited,
                     HaveListened = newState

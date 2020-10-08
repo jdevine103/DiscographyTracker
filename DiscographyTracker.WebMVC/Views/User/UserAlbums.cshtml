@@ -27,12 +27,14 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <p class="icon">
+                    <p>
                         @Html.DisplayFor(modelItem => item.IsFavorited, new { Id = item.UserAlbumID })
                     </p>
-                    <p class="icon">
+
+                    <p>
                         @Html.DisplayFor(modelItem => item.HaveListened, new { Id = item.UserAlbumID })
                     </p>
+
                 </div>
             </div>
         </div>
@@ -59,7 +61,7 @@
                             target.addClass("glyphicon " + (starSet ? "glyphicon-star-empty" : "glyphicon-star"));
                         })
                         .fail(function (r) {
-                            alert("Failed to change star status");
+                            alert("Failed to change favorite status");
                         });
                 });
         });
@@ -72,7 +74,7 @@
                 .click(function (e) {
                     var target = $(e.target);
                     var userAlbumId = target.attr("data-id");
-                    var listenSet = target.hasClass("glyphicon-ok-sign");
+                    var listenSet = target.hasClass("glyphicon-play-circle");
 
                     $.ajax({
                         method: listenSet ? "DELETE" : "PUT",
@@ -81,7 +83,7 @@
                     })
                         .done(function (r) {
                             target.removeClass();
-                            target.addClass("glyphicon " + (listenSet ? "glyphicon-play-circle" : "glyphicon-ok-sign"));
+                            target.addClass("glyphicon " + (listenSet ? "glyphicon-ok-sign" : "glyphicon-play-circle"));
                         })
                         .fail(function (r) {
                             alert("Failed to change listen status");

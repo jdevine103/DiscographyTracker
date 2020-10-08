@@ -10,11 +10,12 @@ namespace DiscographyTracker.Models
     public class SongListItem
     {
         public int SongID { get; set; }
+        public string ArtistName { get; set; }
+        public string AlbumTitle { get; set; }
+        public int ArtistID { get; set; }
         public int AlbumID { get; set; }
         [Display(Name = "Song Name")]
         public string SongName { get; set; }
-        [Display(Name = "Listened?")]
-        public bool HaveListened { get; set; }
     }
     public class SongCreate
     {
@@ -23,7 +24,6 @@ namespace DiscographyTracker.Models
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Song Name")]
         public string SongName { get; set; }
-        public bool HaveListened { get; set; }
     }
     public class SongEdit
     {
@@ -33,7 +33,6 @@ namespace DiscographyTracker.Models
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Song Name")]
         public string SongName { get; set; }
-        public bool HaveListened { get; set; }
     }
     public class SongDetail
     {
@@ -45,7 +44,6 @@ namespace DiscographyTracker.Models
         [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Song Name")]
         public string SongName { get; set; }
-        public bool HaveListened { get; set; }
     }
     public class UserSongListItem
     {
