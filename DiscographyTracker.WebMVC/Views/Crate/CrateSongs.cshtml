@@ -1,11 +1,10 @@
-﻿@model IEnumerable<DiscographyTracker.Models.UserAlbumListItem>
+﻿@model IEnumerable<DiscographyTracker.Models.UserSongListItem>
 
 @{
-    ViewBag.Title = "UserAlbums";
+    ViewBag.Title = "CrateSongs";
 }
-<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 
-<h2>UserAlbums</h2>
+<h2>CrateSongs</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,25 +15,23 @@
     {
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-                <img src="~/Content/defaultassets/default_album.jpg">
+                <img src="~/Content/defaultassets/song_default.jpg">
                 <div class="caption">
-                    <h3>@item.AlbumTitle</h3>
-                    <p>Listening progress: </p>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                            <span class="sr-only">60% Complete (warning)</span>
-                        </div>
-                    </div>
+                    <h3>@item.SongName</h3>
                 </div>
                 <div class="panel-footer">
-                    <p>
-                        @Html.DisplayFor(modelItem => item.IsFavorited, new { Id = item.UserAlbumID })
-                    </p>
-
-                    <p>
-                        @Html.DisplayFor(modelItem => item.HaveListened, new { Id = item.UserAlbumID })
-                    </p>
-
+                    <div class="row">
+                        <div class="footer-icon col-lg-6" style="text-align: center;">
+                            <p class="icon">
+                                @Html.DisplayFor(modelItem => item.IsFavorited, new { Id = item.UserSongID })
+                            </p>
+                        </div>
+                        <div class="footer-icon col-lg-6" style="text-align: center;">
+                            <p class="icon">
+                                @Html.DisplayFor(modelItem => item.HaveListened, new { Id = item.UserSongID })
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,12 +45,11 @@
                 .css({ "cursor": "pointer" })
                 .click(function (e) {
                     var target = $(e.target);
-                    var userAlbumId = target.attr("data-id");
+                    var userSongId = target.attr("data-id");
                     var starSet = target.hasClass("glyphicon-star");
-
                     $.ajax({
                         method: starSet ? "DELETE" : "PUT",
-                        url: "/api/userAlbum/" + userAlbumId + "/star",
+                        url: "/api/userSong/" + userSongId + "/star",
                         data: null
                     })
                         .done(function (r) {
@@ -61,9 +57,10 @@
                             target.addClass("glyphicon " + (starSet ? "glyphicon-star-empty" : "glyphicon-star"));
                         })
                         .fail(function (r) {
-                            alert("Failed to change favorite status");
+                            alert("Failed to change star status");
                         });
                 });
+
         });
     </script>
 
@@ -73,17 +70,16 @@
                 .css({ "cursor": "pointer" })
                 .click(function (e) {
                     var target = $(e.target);
-                    var userAlbumId = target.attr("data-id");
-                    var listenSet = target.hasClass("glyphicon-play-circle");
-
+                    var userSongId = target.attr("data-id");
+                    var listenSet = target.hasClass("glyphicon-ok-sign");
                     $.ajax({
                         method: listenSet ? "DELETE" : "PUT",
-                        url: "/api/userAlbum/" + userAlbumId + "/listen",
+                        url: "/api/userSong/" + userSongId + "/listen",
                         data: null
                     })
                         .done(function (r) {
                             target.removeClass();
-                            target.addClass("glyphicon " + (listenSet ? "glyphicon-ok-sign" : "glyphicon-play-circle"));
+                            target.addClass("glyphicon " + (listenSet ? "glyphicon-play-circle" : "glyphicon-ok-sign"));
                         })
                         .fail(function (r) {
                             alert("Failed to change listen status");

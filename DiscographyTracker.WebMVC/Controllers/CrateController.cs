@@ -15,35 +15,39 @@ namespace DiscographyTracker.WebMVC.Controllers
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new UserArtistService(userId);
+            var service = new CrateService(userId);
             var model = service.GetCrate();
             return View(model);
         }
         public ActionResult AddToCrate(int id)
         {
-            var svc = CreateArtistService();
-            var model = svc.GetArtistById(id);
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var svc = new CrateService(userId);
 
-            var newModel = model.ToUserArtistCreate();
-
-            var artistService = CreateUserArtistService();
-            var albumService = CreateUserAlbumService();
-            var songService = CreateUserSongService();
-
-            bool artistAdded = artistService.CreateUserArtist(newModel);
-            bool albumsAdded = albumService.CreateUserAlbums(id);
-            bool songsAdded = songService.CreateUserSongs(id);
-
-            if (artistAdded && albumsAdded && songsAdded)
+            if (svc.AddToCrate(id))
             {
-                TempData["SaveResult"] = $" {model.ArtistName} was added to your crate.";
+                TempData["SaveResult"] = $" was added to your crate.";
                 return RedirectToAction("Index");
             }
             else
             {
-                TempData["SaveResult"] = $" {model.ArtistName} is already in your crate.";
+                TempData["SaveResult"] = $" is already in your crate.";
                 return RedirectToAction("Index");
             }
+        }
+        public ActionResult CrateAlbums(int id)
+        {
+            var albumService = CreateCrateService();
+            var model = albumService.GetUserAlbums(id);
+
+            return View(model);
+        }        
+        public ActionResult CrateSongs(int id)
+        {
+            var songService = CreateUserSongService();
+            var model = songService.GetUserSongs(id);
+
+            return View(model);
         }
         [ActionName("Delete")]
         public ActionResult Delete(int id)
@@ -66,13 +70,6 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
-        public ActionResult CrateAlbums(int id)
-        {
-            var albumService = CreateUserAlbumService();
-            var model = albumService.GetUserAlbums(id);
-
-            return View(model);
-        }
 
         private UserArtistService CreateUserArtistService()
         {
@@ -85,23 +82,17 @@ namespace DiscographyTracker.WebMVC.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new UserAlbumService(userId);
             return service;
-        }
+        }        
         private UserSongService CreateUserSongService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new UserSongService(userId);
             return service;
-        }
-        private ArtistService CreateArtistService()
+        }        
+        private CrateService CreateCrateService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ArtistService(userId);
-            return service;
-        }
-        private AlbumService CreateAlbumService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new AlbumService(userId);
+            var service = new CrateService(userId);
             return service;
         }
     }

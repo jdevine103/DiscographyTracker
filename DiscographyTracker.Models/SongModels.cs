@@ -47,26 +47,25 @@ namespace DiscographyTracker.Models
     }
     public class UserSongListItem
     {
+        public int UserSongID { get; set; }
+
         public int UserAlbumID { get; set; }
 
         public string UserID { get; set; }
+        public string SongName { get; set; }
 
         public int SongID { get; set; }
+        [UIHint("Favorited")]
+        [Display(Name = "Favorited")]
         public bool IsFavorited { get; set; }
-        public bool HaveListened { get; set; }
-    }    
-    public class UserSongCreate
-    {
-        public int UserAlbumID { get; set; }
-
-        public string UserID { get; set; }
-
-        public int SongID { get; set; }
-        public bool IsFavorited { get; set; }
+        [UIHint("Listened")]
+        [Display(Name = "Listened")]
         public bool HaveListened { get; set; }
     }    
     public class UserSongEdit
     {
+        public string SongName { get; set; }
+        public int UserSongID { get; set; }
         public int UserAlbumID { get; set; }
 
         public string UserID { get; set; }
@@ -77,6 +76,9 @@ namespace DiscographyTracker.Models
     }    
     public class UserSongDetail
     {
+        public string SongName { get; set; }
+        public int UserSongID { get; set; }
+
         public int UserAlbumID { get; set; }
 
         public string UserID { get; set; }
