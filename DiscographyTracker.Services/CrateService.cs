@@ -59,6 +59,7 @@ namespace DiscographyTracker.Services
             var userAlbums = user.UserAlbums.Where(k => k.Album.ArtistID == id)
                         .Select(j => new UserAlbumDetail
                         {
+                            UserAlbumID = j.UserAlbumID,
                             AlbumTitle = j.Album.AlbumTitle,
                             IsFavorited = j.IsFavorited,
                             HaveListened = j.HaveListened,
@@ -78,14 +79,6 @@ namespace DiscographyTracker.Services
                             HaveListened = j.HaveListened,
                         }).ToList();
             return userSongs;
-            //        UserSongs = e.User.UserSongs.Where(i => i.UserAlbumID == j.UserAlbumID)
-            //            .Select(q => new UserSongDetail
-            //            {
-            //                UserAlbumID = j.UserAlbumID,
-            //                IsFavorited = j.IsFavorited,
-            //                HaveListened = j.HaveListened
-            //            })
-            //    }).ToList()
         }
     }
 }

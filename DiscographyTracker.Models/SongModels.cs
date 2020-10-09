@@ -62,16 +62,6 @@ namespace DiscographyTracker.Models
         [Display(Name = "Listened")]
         public bool HaveListened { get; set; }
     }    
-    public class UserSongCreate
-    {
-        public int UserAlbumID { get; set; }
-
-        public string UserID { get; set; }
-
-        public int SongID { get; set; }
-        public bool IsFavorited { get; set; }
-        public bool HaveListened { get; set; }
-    }    
     public class UserSongEdit
     {
         public string SongName { get; set; }

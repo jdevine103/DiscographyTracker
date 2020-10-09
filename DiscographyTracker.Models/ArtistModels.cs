@@ -113,7 +113,6 @@ namespace DiscographyTracker.Models
             }
         }
     }
-
     public class UserArtistEdit
     {
         public string UserID { get; set; }

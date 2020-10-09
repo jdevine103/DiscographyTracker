@@ -271,10 +271,7 @@
     <Content Include="Views\Artist\Delete.cshtml" />
     <Content Include="Views\Album\Delete.cshtml" />
     <Content Include="Views\Song\Delete.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Artist\AddAlbum.cshtml" />
-    <Content Include="Views\User\Delete.cshtml" />
-    <Content Include="Views\User\UserAlbums.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Favorited.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Listened.cshtml" />
     <Content Include="Views\Crate\Index.cshtml" />

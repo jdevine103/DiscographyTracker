@@ -68,15 +68,8 @@ namespace DiscographyTracker.Models
         public DateTimeOffset ReleaseDate { get; set; }
         public IEnumerable<SongDetail> Songs { get; set; }
     }
-    public class UserAlbumCreate
-    {
-        public int UserAlbumID { get; set; }
-        public string UserID { get; set; }
-        public int AlbumID { get; set; }
-        public bool IsFavorited { get; set; }
-        public bool HaveListened { get; set; }
-    }
-        public class UserAlbumListItem
+
+    public class UserAlbumListItem
     {
         public int UserAlbumID { get; set; }
         public string AlbumTitle { get; set; }
@@ -121,12 +114,13 @@ namespace DiscographyTracker.Models
                     double ret = (double)k / (double)UserSongs.Count() * 100;
                     return Convert.ToInt32(ret);
                 }
+
                 else
                     return 0;
             }
         }
     }
-        public class UserAlbumEdit
+    public class UserAlbumEdit
     {
         public int UserAlbumID { get; set; }
         public string UserID { get; set; }
@@ -134,14 +128,13 @@ namespace DiscographyTracker.Models
         public bool IsFavorited { get; set; }
         public bool HaveListened { get; set; }
     }
-        public class UserAlbumDetail
+    public class UserAlbumDetail
     {
         public int UserAlbumID { get; set; }
         public string UserID { get; set; }
         public string AlbumTitle { get; set; }
         public int AlbumID { get; set; }
-        public IEnumerable<UserSongDetail> UserSongs { get; set; }
-
+        public List<UserSongDetail> UserSongs { get; set; }
         public int AlbumCount
         {
             get
@@ -149,8 +142,49 @@ namespace DiscographyTracker.Models
                 return UserSongs.Count();
             }
         }
+        [UIHint("Favorited")]
+        [Display(Name = "Favorited")]
         public bool IsFavorited { get; set; }
+        [UIHint("Listened")]
+        [Display(Name = "Listened")]
         public bool HaveListened { get; set; }
+        public int AlbumFavoriteProgress
+        {
+            get
+            {
+                int k = 0;
+                for (int i = 0; i < UserSongs.Count(); i++)
+                {
+                    if (UserSongs[i].IsFavorited)
+                        k++;
+                }
+                if (k != 0)
+                {
+                    double ret = (double)k / (double)UserSongs.Count() * 100;
+                    return Convert.ToInt32(ret);
+                }
+                else
+                    return 0;
+            }
+        }
+        public int HaveListenedProgress
+        {
+            get
+            {
+                int k = 0;
+                for (int i = 0; i < UserSongs.Count(); i++)
+                {
+                    if (UserSongs[i].HaveListened)
+                        k++;
+                }
+                if (k != 0)
+                {
+                    double ret = (double)k / (double)UserSongs.Count() * 100;
+                    return Convert.ToInt32(ret);
+                }
+                else
+                    return 0;
+            }
+        }
     }
-
 }
