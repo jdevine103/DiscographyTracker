@@ -135,7 +135,7 @@ namespace DiscographyTracker.Models
         public string AlbumTitle { get; set; }
         public int AlbumID { get; set; }
         public List<UserSongDetail> UserSongs { get; set; }
-        public int AlbumCount
+        public int SongCount
         {
             get
             {
