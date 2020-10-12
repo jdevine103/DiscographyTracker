@@ -7,7 +7,7 @@
 <h2>Your Crate</h2>
 
 <p>
-    @Html.ActionLink("Add an Artist to your Crate", "Index", "Artist", new { @class = "btn btn-default btn-large" })
+    @Html.ActionLink("Add an Artist to your Crate", "Index", "Artist", null, new { @class = "btn btn-default btn-large" })
 </p>
 @{ int i = 0; }
 @foreach (var item in Model)
@@ -88,7 +88,6 @@
                                     }
                                 </div>
                             </div>
-                            <div class="panel-footer">Panel Footer</div>
                         </div>
                     </div>
                 </div>
