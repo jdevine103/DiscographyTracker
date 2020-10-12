@@ -32,22 +32,11 @@
                         </div>
                     </div>
                     <div>
-                        @Html.ActionLink("Songs", "CrateSongs", "Crate", new { id = userAlbum.UserAlbumID }, null) |
+                        @Html.ActionLink("Songs", "CrateSongs", "Crate", new { id = userAlbum.UserAlbumID }, new { @class = "btn btn-default btn-large" }) |
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <div class="row">
-                        <div class="footer-icon col-lg-6" style="text-align: center;">
-                            <p class="icon">
-                                @Html.DisplayFor(modelItem => userAlbum.IsFavorited, new { Id = userAlbum.UserAlbumID })
-                            </p>
-                        </div>
-                        <div class="footer-icon col-lg-6" style="text-align: center;">
-                            <p class="icon">
-                                @Html.DisplayFor(modelItem => userAlbum.HaveListened, new { Id = userAlbum.UserAlbumID })
-                            </p>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -9,28 +9,8 @@
     <img src="~/Content/defaultassets/home_page.jpg" class="img-rounded">
     <p> 
     @Html.ActionLink("Start a Crate", "Register", "Account", null, new { @class = "btn btn-primary btn-large" }) |
-    @Html.ActionLink("View your Crate", "Index", "User", null, new { @class = "btn btn-primary btn-large" }) |
+    @Html.ActionLink("View your Crate", "Index", "Crate", null, new { @class = "btn btn-primary btn-large" }) |
     @Html.ActionLink("View Artist Bank", "Index", "Artist", null, new { @class = "btn btn-primary btn-large" }) 
     </p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Artists</h2>
-        <p>
-            Check out existing artists on DiscographyTracker or enter a new artist and their discog
-        </p>
-        <p> @Html.ActionLink("Artists", "Index", "Artist", null, new { @class = "btn btn-default btn-large" })</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Albums</h2>
-        <p>Browse existing albums</p>
-        <p> @Html.ActionLink("Albums", "Index", "Album", null, new { @class = "btn btn-default btn-large" })</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Songs</h2>
-        <p>This is all going to change</p>
-        <p> @Html.ActionLink("Songs", "Index", "Song", null, new { @class = "btn btn-default btn-large" })</p>
-    </div>
 </div>
 

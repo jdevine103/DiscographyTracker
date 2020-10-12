@@ -69,47 +69,42 @@ namespace DiscographyTracker.Models
     }
     public class UserArtistListItem
     {
+        public int UserAlbumID { get; set; }
         public string ArtistName {get; set; }
         public string UserID { get; set; }
         public int UserArtistID { get; set; }
         public int ArtistID { get; set; }
         public List<UserAlbumDetail> UserAlbums { get; set; }
-        public int AlbumFavoriteProgress
+        public int ArtistFavoriteProgress
         {
             get
             {
-                int k = 0;
-                for (int i = 0; i < UserAlbums.Count(); i++)
+                int favCount = 0;
+                foreach (var album in UserAlbums)
                 {
-                    if (UserAlbums[i].IsFavorited)
-                        k++;
+                    favCount += album.AlbumFavoriteProgress;
                 }
-                if (k != 0)
+                if (UserAlbums.Count() == 0)
                 {
-                    double ret = (double)k / (double)UserAlbums.Count() * 100;
-                    return Convert.ToInt32(ret);
-                }
-                else
                     return 0;
+                }
+                return favCount / UserAlbums.Count();
             }
         }
-        public int HaveListenedProgress
+        public int ArtistListenedProgress
         {
             get
             {
-                int k = 0;
-                for (int i = 0; i < UserAlbums.Count(); i++)
+                int listenCount = 0;
+                foreach (var album in UserAlbums)
                 {
-                    if (UserAlbums[i].HaveListened)
-                        k++;
+                    listenCount += album.HaveListenedProgress;
                 }
-                if (k != 0)
+                if (UserAlbums.Count() == 0)
                 {
-                    double ret = (double)k / (double)UserAlbums.Count() * 100;
-                    return Convert.ToInt32(ret);
-                }
-                else
                     return 0;
+                }
+                return listenCount / UserAlbums.Count();
             }
         }
     }

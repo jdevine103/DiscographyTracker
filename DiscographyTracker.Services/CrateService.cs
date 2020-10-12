@@ -3,6 +3,7 @@ using DiscographyTracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Metadata.Edm;
+using System.Globalization;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -24,17 +25,24 @@ namespace DiscographyTracker.Services
             var user = ctx.Users.FirstOrDefault(u => u.Id == _userId.ToString());
             var artist = ctx.Artists.Find(id);
             //add if for duplicates
-            user.UserArtists.Add(new UserArtist { Artist = artist });
-            user.UserAlbums.AddRange(artist.Albums.Select(a => new UserAlbum { AlbumID = a.AlbumID }));
+            UserArtist userArtist = new UserArtist { Artist = artist };
+            user.UserArtists.Add(userArtist);
+
+            ctx.SaveChanges();
+
+            user.UserAlbums.AddRange(artist.Albums.Select(a => new UserAlbum { AlbumID = a.AlbumID, UserArtistID = userArtist.UserArtistID}));
+
+            ctx.SaveChanges();
 
             int songCount = 0;
             foreach(var album in artist.Albums)
             {
-                user.UserSongs.AddRange(album.Songs.Select(a => new UserSong { SongID = a.SongID }));
+                var userAlbum = ctx.UserAlbums.FirstOrDefault(j => j.AlbumID == album.AlbumID && j.UserID == user.Id);
+                user.UserSongs.AddRange(album.Songs.Select(a => new UserSong { SongID = a.SongID, UserAlbumID = userAlbum.UserAlbumID }));
                 songCount += album.Songs.Count();
             }
                 
-            return ctx.SaveChanges() == 1 + artist.Albums.Count + songCount;
+            return ctx.SaveChanges() == songCount;
         }
         public IEnumerable<UserArtistListItem> GetCrate()
         {
@@ -47,7 +55,7 @@ namespace DiscographyTracker.Services
                     ArtistID = e.ArtistID,
                     UserArtistID = e.UserArtistID,
                     UserID = _userId.ToString(),
-                    UserAlbums = GetUserAlbums(e.ArtistID)
+                    UserAlbums = GetUserAlbums(e.UserArtistID)
                     });
                 return crate.ToList();
         }
@@ -56,14 +64,14 @@ namespace DiscographyTracker.Services
         {
             var user = ctx.Users.FirstOrDefault(u => u.Id == _userId.ToString());
 
-            var userAlbums = user.UserAlbums.Where(k => k.Album.ArtistID == id)
+            var userAlbums = user.UserAlbums.Where(k => k.UserArtistID == id)
                         .Select(j => new UserAlbumDetail
                         {
                             UserAlbumID = j.UserAlbumID,
                             AlbumTitle = j.Album.AlbumTitle,
                             IsFavorited = j.IsFavorited,
                             HaveListened = j.HaveListened,
-                            UserSongs = GetUserSongs(j.AlbumID)
+                            UserSongs = GetUserSongs(j.UserAlbumID)
                         }).ToList();
             return userAlbums;
         }
@@ -71,9 +79,10 @@ namespace DiscographyTracker.Services
         {
             var user = ctx.Users.FirstOrDefault(u => u.Id == _userId.ToString());
 
-            var userSongs = user.UserSongs.Where(k => k.Song.AlbumID == id)
+            var userSongs = user.UserSongs.Where(k => k.UserAlbumID == id)
                         .Select(j => new UserSongDetail
                         {
+                            UserSongID = j.UserSongID,
                             SongName = j.Song.SongName,
                             IsFavorited = j.IsFavorited,
                             HaveListened = j.HaveListened,

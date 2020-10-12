@@ -35,6 +35,7 @@ namespace DiscographyTracker.Data
         [ForeignKey(nameof(Album))]
         public int AlbumID { get; set; }
         public virtual Album Album { get; set; }
+        public int UserArtistID { get; set; }
         [DefaultValue(false)]
         public bool IsFavorited { get; set; }
         [DefaultValue(false)]
@@ -51,6 +52,8 @@ namespace DiscographyTracker.Data
 
         [ForeignKey(nameof(Song))]
         public int SongID { get; set; }
+        public int UserAlbumID { get; set; }
+
         public virtual Song Song { get; set; }
         [DefaultValue(false)]
         public bool IsFavorited { get; set; }

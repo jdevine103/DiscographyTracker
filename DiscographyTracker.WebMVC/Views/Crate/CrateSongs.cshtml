@@ -1,15 +1,10 @@
-﻿@model IEnumerable<DiscographyTracker.Models.UserSongListItem>
+﻿@model List<DiscographyTracker.Models.UserSongDetail>
 
 @{
     ViewBag.Title = "CrateSongs";
 }
 
-<h2>CrateSongs</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
+<h2>Album title here</h2>
 <div class="row">
     @foreach (var item in Model)
     {
@@ -36,6 +31,11 @@
             </div>
         </div>
     }
+</div>
+<div>
+    <p>
+        @Html.ActionLink("Back to Crate", "Index", "Crate", new { @class = "btn btn-default btn-large" })
+    </p>
 </div>
 
 @section scripts {

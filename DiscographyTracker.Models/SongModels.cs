@@ -47,6 +47,7 @@ namespace DiscographyTracker.Models
     }
     public class UserSongListItem
     {
+        public string AlbumName { get; set; }
         public int UserSongID { get; set; }
 
         public int UserAlbumID { get; set; }
@@ -84,7 +85,11 @@ namespace DiscographyTracker.Models
         public string UserID { get; set; }
 
         public int SongID { get; set; }
+        [UIHint("Favorited")]
+        [Display(Name = "Favorited")]
         public bool IsFavorited { get; set; }
+        [UIHint("Listened")]
+        [Display(Name = "Listened")]
         public bool HaveListened { get; set; }
     }
 }
