@@ -44,7 +44,7 @@ namespace DiscographyTracker.WebMVC.Controllers
         }        
         public ActionResult CrateSongs(int id)
         {
-            var songService = CreateUserSongService();
+            var songService = CreateCrateService();
             var model = songService.GetUserSongs(id);
 
             return View(model);
