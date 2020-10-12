@@ -4,27 +4,24 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>All Songs | @Html.ActionLink("Add Song to Album", "Create", null, new { @class = "btn btn-primary btn-large" })
+    </h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-sm-2 col-md-1 col-lg-2">
+            <div class="col-md-4">
                 <div class="thumbnail">
                     <img src="~/Content/defaultassets/song_default.jpg" alt="song_default_img">
                     <div class="caption">
                         <h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> - @item.SongName</h3>
-                        <p>Album Count: @item.AlbumID</p>
+                        <p>@item.ArtistName - @item.AlbumTitle</p>
                         <p>
                             @Html.ActionLink("Song Info", "Details", new { id = item.AlbumID }, new { @class = "btn btn-info btn-sm" })
-                            @Html.ActionLink("Add to My Crate", "AddToCrate", "User", new { id = item.ArtistID }, new { @class = "btn btn-primary btn-sm" })
-                            @Html.ActionLink("Edit", "Edit", new { id = item.SongID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.SongID }) |
+                            @Html.ActionLink("Edit", "Edit", new { id = item.SongID }, new { @class = "btn btn-primary btn-sm" }) 
+                            @Html.ActionLink("Delete", "Delete", new { id = item.SongID }, new { @class = "btn btn-primary btn-sm" }) 
                         </p>
                     </div>
                 </div>

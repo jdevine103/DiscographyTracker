@@ -83,6 +83,10 @@ namespace DiscographyTracker.Models
                 {
                     favCount += album.AlbumFavoriteProgress;
                 }
+                if (UserAlbums.Count() == 0)
+                {
+                    return 0;
+                }
                 return favCount / UserAlbums.Count();
             }
         }
@@ -94,6 +98,10 @@ namespace DiscographyTracker.Models
                 foreach (var album in UserAlbums)
                 {
                     listenCount += album.HaveListenedProgress;
+                }
+                if (UserAlbums.Count() == 0)
+                {
+                    return 0;
                 }
                 return listenCount / UserAlbums.Count();
             }
