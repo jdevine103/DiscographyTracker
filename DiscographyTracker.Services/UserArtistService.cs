@@ -34,16 +34,34 @@ namespace DiscographyTracker.Services
         }
         public bool DeleteUserArtist(int artistID)
         {
+            int userAlbumCount = 0;
+            int userSongCount = 0;
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                         .UserArtists
-                        .Single(e => e.UserArtistID == artistID);
+                        .FirstOrDefault(e => e.UserArtistID == artistID);
+                var userAlbums =
+                    ctx.UserAlbums.Where(i => i.UserArtistID == entity.UserArtistID).ToList();
+                userAlbumCount = userAlbums.Count();
 
+                foreach (var userAlbum in userAlbums)
+                {
+                    var userSongs = ctx.UserSongs.Where(e => e.UserAlbumID == userAlbum.UserAlbumID).ToList();
+                    //userSongCount = userSongs.Count();  -- needs MARS
+                    foreach (var userSong in userSongs)
+                    {
+                        ctx.UserSongs.Remove(userSong);
+                        userSongCount++;
+                    }
+
+                    ctx.UserAlbums.Remove(userAlbum);
+                }
+                
                 ctx.UserArtists.Remove(entity);
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 1 + userAlbumCount + userSongCount;
             }
         }
     }
