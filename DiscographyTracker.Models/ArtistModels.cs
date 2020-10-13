@@ -27,6 +27,7 @@ namespace DiscographyTracker.Models
         [Required]
         [Display(Name = "Artist Name")]
         public string ArtistName { get; set; }
+        public List<AlbumCreate> Albums {get; set;}
     }
     public class ArtistEdit
     {

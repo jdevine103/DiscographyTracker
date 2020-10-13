@@ -23,16 +23,22 @@ namespace DiscographyTracker.WebMVC.Controllers
         public ActionResult Create(ArtistCreate model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ArtistService(userId);
+            var artistEntity = new Artist
+            {
+                ArtistName = model.ArtistName,
+                Albums = model.Albums?.Select(i => new Album { AlbumTitle = i.AlbumTitle, ReleaseDate = i.ReleaseDate }).ToList()
+            };
+            var context = new ApplicationDbContext();
+            context.Artists.Add(artistEntity);
 
-            Artist artist = service.CreateArtist(model);
+            var itemCount = model.Albums is null ? 0 : model.Albums.Count;
+            var expectedChangeCount = 1 + itemCount;
+            if (context.SaveChanges() != expectedChangeCount)
+                return View(model);
 
-            return RedirectToAction("Details", "Artist", new { id = artist.ArtistID });
+            return RedirectToAction(nameof(Index));
         }
         public ActionResult Details(int id)
         {
