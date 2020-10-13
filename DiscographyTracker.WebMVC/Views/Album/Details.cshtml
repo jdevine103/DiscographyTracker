@@ -22,7 +22,7 @@
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
                     <p>
-                        @Html.ActionLink($"Add Song to {Model.AlbumTitle}", "Edit", new { id = Model.AlbumID }, new { @class = "btn btn-primary btn-large" }) |
+                        @Html.ActionLink($"Add Song to {Model.AlbumTitle}", "Create", "Song", new { id = Model.AlbumID }, new { @class = "btn btn-primary btn-large" }) |
                         @Html.ActionLink("Edit Album Content", "Edit", new { id = Model.AlbumID }, new { @class = "btn btn-primary btn-large" }) |
                         @Html.ActionLink("Delete Album", "Delete", new { id = Model.AlbumID }, new { @class = "btn btn-danger btn-large" })
                     </p>
@@ -50,7 +50,7 @@
         </div>
     }
 </div>
-@Html.ActionLink($"Add Song to {Model.AlbumTitle}", "Edit", new { id = Model.AlbumID }, new { @class = "btn btn-primary btn-large" })
+@Html.ActionLink($"Add Song to {Model.AlbumTitle}", "Create", "Song", new { id = Model.AlbumID }, new { @class = "btn btn-primary btn-large" })
 
 <hr />
 <p>

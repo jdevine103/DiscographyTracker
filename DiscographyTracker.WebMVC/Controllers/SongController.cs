@@ -22,13 +22,34 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return View(model);
         }
-        
+        //GET: Song/Create/?
+        public ActionResult Create(int? id)
+        {
+            if (id.HasValue)
+                PopulateAlbums(id.Value);
+            else
+                PopulateAlbums();
+
+            return View();
+        }
+        private void PopulateAlbums()
+        {
+            ViewBag.AlbumID = new SelectList(new AlbumService(Guid.Parse(User.Identity.GetUserId())).GetAlbums(), "AlbumID", "AlbumTitle");
+        }
+        private void PopulateAlbums(int id)
+        {
+            ViewBag.AlbumID = new SelectList(new AlbumService(Guid.Parse(User.Identity.GetUserId())).GetAlbums(), "AlbumID", "AlbumTitle", id);
+        }
+        //POST: Song/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(SongCreate model)
         {
             if (!ModelState.IsValid)
             {
                 //ViewBag
-                ViewBag.Albums = new SelectList(_db.Albums.ToList(), "AlbumID", "AlbumTitle");
+                //ViewBag.Albums = new SelectList(_db.Albums.ToList(), "AlbumID", "AlbumTitle");
+                PopulateAlbums();
                 return View(model);
             }
 
@@ -37,7 +58,16 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             service.CreateSong(model);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Album", new { id = model.AlbumID });
+
+
+
+            //var userId = Guid.Parse(User.Identity.GetUserId());
+            //var service = new SongService(userId);
+
+            //service.CreateSong(model);
+
+            //return RedirectToAction("Index");
         }
         public ActionResult Details(int id)
         {
