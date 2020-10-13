@@ -20,10 +20,9 @@ namespace DiscographyTracker.Models
     public class SongCreate
     {
         public int AlbumID { get; set; }
-        [Required]
-        [MaxLength(200, ErrorMessage = "There are too many characters in this field.")]
-        [Display(Name = "Song Name")]
         public string SongName { get; set; }
+
+        public List<string> Songs { get; set; }
     }
     public class SongEdit
     {

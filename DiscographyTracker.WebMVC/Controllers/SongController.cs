@@ -47,27 +47,21 @@ namespace DiscographyTracker.WebMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //ViewBag
-                //ViewBag.Albums = new SelectList(_db.Albums.ToList(), "AlbumID", "AlbumTitle");
                 PopulateAlbums();
                 return View(model);
             }
 
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new SongService(userId);
+            var context = new ApplicationDbContext();
 
-            service.CreateSong(model);
+            foreach (var songName in model.Songs)
+            {
+                Song newSong = new Song { AlbumID = model.AlbumID, SongName = songName };
+                context.Songs.Add(newSong);
+            }
+
+            context.SaveChanges();
 
             return RedirectToAction("Details", "Album", new { id = model.AlbumID });
-
-
-
-            //var userId = Guid.Parse(User.Identity.GetUserId());
-            //var service = new SongService(userId);
-
-            //service.CreateSong(model);
-
-            //return RedirectToAction("Index");
         }
         public ActionResult Details(int id)
         {

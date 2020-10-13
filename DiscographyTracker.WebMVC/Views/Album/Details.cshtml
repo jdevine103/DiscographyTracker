@@ -54,5 +54,5 @@
 
 <hr />
 <p>
-    @Html.ActionLink("Back to Album Bank", "Index", null, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink($"Back to {Model.ArtistName}", "Details", "Artist", new { id = Model.ArtistID }, new { @class = "btn btn-primary btn-large" })
 </p>

@@ -21,8 +21,8 @@ namespace DiscographyTracker.Services
             var entity =
                 new Song()
                 {
-                    AlbumID = model.AlbumID,
-                    SongName = model.SongName,
+                    AlbumID = model.AlbumID
+                    //SongName = model.SongName,
                 };
             using (var db = new ApplicationDbContext())
             {

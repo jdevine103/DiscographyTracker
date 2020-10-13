@@ -43,6 +43,7 @@
                 <img src="~/Content/defaultassets/default_album.jpg">
                 <div class="caption">
                     <h3>@item.AlbumTitle</h3>
+                    <h4>Song Count: @item.Songs.Count()</h4>
                     <p>Release Date: @item.ReleaseDate</p>
                     <p>@Html.ActionLink("Album Details", "Details", "Album", new { id = item.AlbumID }, new { @class = "btn btn-default btn-large" })</p>
                 </div>
@@ -50,5 +51,7 @@
         </div>
     }
 </div>
+@Html.ActionLink($"Add Album for {Model.ArtistName}", "Create", "Album", new { id = Model.ArtistID }, new { @class = "btn btn-primary btn-large" })
+
 <hr />
 @Html.ActionLink("Back to Artist Bank", "Index", null, new { @class = "btn btn-primary btn-large" })
