@@ -116,6 +116,7 @@ namespace DiscographyTracker.Models
     }
     public class UserArtistDetail
     {
+        public string ArtistName { get; set; }
         public string UserID { get; set; }
         public int UserArtistID { get; set; }
         public int ArtistID { get; set; }

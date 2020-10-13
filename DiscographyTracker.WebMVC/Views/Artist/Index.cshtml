@@ -6,6 +6,18 @@
 
 <h2>All Artists | @Html.ActionLink("Add New Artist", "Create", null, new { @class = "btn btn-primary btn-large" })</h2>
 
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+
+
 <div class="container">
     <div class="row">
         @foreach (var item in Model)

@@ -19,7 +19,7 @@
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
                     <p>
-                        @Html.ActionLink($"Add Album for {Model.ArtistName}", "Edit", new { id = Model.ArtistID }, new { @class = "btn btn-primary btn-large" }) |
+                        @Html.ActionLink($"Add Album for {Model.ArtistName}", "Create", "Album", new { id = Model.ArtistID }, new { @class = "btn btn-primary btn-large" }) |
                         @Html.ActionLink("Edit Artist Name", "Edit", new { id = Model.ArtistID }, new { @class = "btn btn-primary btn-large" }) |
                         @Html.ActionLink("Delete Artist", "Delete", new { id = Model.ArtistID }, new { @class = "btn btn-danger btn-large" })
                     </p>

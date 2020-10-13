@@ -22,12 +22,33 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             return View(model);
         }
+        //GET: Album/Create/?
+        public ActionResult Create(int? id)
+        {
+            if (id.HasValue)
+                PopulateArtists(id.Value);
+            else
+                PopulateArtists();
+
+            return View();
+        }
+
+        private void PopulateArtists()
+        {
+            ViewBag.ArtistID = new SelectList(new ArtistService(Guid.Parse(User.Identity.GetUserId())).GetArtists(), "ArtistID", "ArtistName");
+        }
+        private void PopulateArtists(int id)
+        {
+            ViewBag.ArtistID = new SelectList(new ArtistService(Guid.Parse(User.Identity.GetUserId())).GetArtists(), "ArtistID", "ArtistName", id);
+        }
+        //POST: Album/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(AlbumCreate model)
         {
             if (!ModelState.IsValid)
             {
-                //ViewBag
-                ViewBag.Artists = new SelectList(_db.Artists.ToList(), "ArtistID", "ArtistName");
+                PopulateArtists();
                 return View(model);
             }
             
@@ -37,7 +58,7 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             service.CreateAlbum(model);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Artist", new { id = model.ArtistID });
         }        
         public ActionResult Details(int id)
         {

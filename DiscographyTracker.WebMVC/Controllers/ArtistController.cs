@@ -30,65 +30,16 @@ namespace DiscographyTracker.WebMVC.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new ArtistService(userId);
 
-            service.CreateArtist(model);
+            Artist artist = service.CreateArtist(model);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Artist", new { id = artist.ArtistID });
         }
-        //public ActionResult AddAlbum(int id)
-        //{
-        //    AlbumCreate model = new AlbumCreate();
-        //    model.ArtistID = id;
-        //    var svc = CreateAlbumService();
-        //    Album newAlbum = svc.CreateAlbum(model);
-        //    //this does not pass through to POST
-        //    id = newAlbum.AlbumID;
-            
-        //    return View(model);
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult AddAlbum(int id, AlbumCreate model)
-        //{
-        //    if (!ModelState.IsValid) return View(model);
-
-        //    if (model.ArtistID != id)
-        //    {
-        //        ModelState.AddModelError("", "Id Mismatch");
-        //        return View(model);
-        //    }
-        //    AlbumEdit editModel = model.ToAlbumEdit();
-            
-        //    //assign editModel.AlbumID to most recet entry?? seems improper 
-            
-        //    var service = CreateAlbumService();
-        //    if (service.UpdateAlbum(editModel))
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(model);
-        //}
         public ActionResult Details(int id)
         {
             var service = new ArtistService();
             var model = service.GetArtistById(id);
 
             return View(model);
-        }
-        public ActionResult CreateWithAlbum(ArtistAlbumCreate model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ArtistService(userId);
-            var albumService = new AlbumService(userId);
-
-            Artist newArtist = service.CreateArtist(model.ToArtistCreate(model));
-            albumService.CreateAlbum(model.ToAlbumCreate(model, newArtist.ArtistID));
-
-            return RedirectToAction("Index");
         }
         public ActionResult Edit(int id)
         {

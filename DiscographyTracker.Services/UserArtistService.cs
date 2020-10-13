@@ -28,6 +28,7 @@ namespace DiscographyTracker.Services
                 return
                     new UserArtistDetail
                     {
+                        ArtistName = entity.Artist.ArtistName,
                         ArtistID = entity.ArtistID,
                     };
             }

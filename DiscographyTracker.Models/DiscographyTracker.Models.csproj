@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="AlbumModels.cs" />
     <Compile Include="ArtistModels.cs" />
-    <Compile Include="JunctionModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SongModels.cs" />
   </ItemGroup>

@@ -26,13 +26,13 @@ namespace DiscographyTracker.WebMVC.Controllers
 
             if (svc.AddToCrate(id))
             {
-                TempData["SaveResult"] = $" was added to your crate.";
-                return RedirectToAction("Index");
+                TempData["SaveResult"] = $"Your Crate was updated";
+                return RedirectToAction("Index", "Artist");
             }
             else
             {
-                TempData["SaveResult"] = $" is already in your crate.";
-                return RedirectToAction("Index");
+                TempData["SaveResult"] = $"Artist already in Crate.";
+                return RedirectToAction("Index", "Artist");
             }
         }
         public ActionResult CrateAlbums(int id)
